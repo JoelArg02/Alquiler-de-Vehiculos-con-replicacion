@@ -1,36 +1,48 @@
-const Business = require("../models/agencias.js");
+const Agencia = require("../models/agencias.js");
 
-exports.getBusiness = (req, res) => {
-  Business.getBusiness((err, Business) => {
+exports.obtenerAgencias = (req, res) => {
+  Agencia.obtenerAgencia((err, Agencia) => {
     if (err) {
-      console.error("Error al obtener los negocios:", err);
+      console.error("Error al obtener las agencias:", err);
       res.status(500).json({ error: "Error interno del servidor" });
     } else {
-      res.json(Business);
-    }
-  });
-};
-
-exports.createBusiness = (req, res) => {
-  const { negocio, lema, facebook, instagram, whatsapp, correo_admin, correo_publico } = req.body;
-  Business.createBusiness(negocio, lema, facebook, instagram, whatsapp, correo_admin, correo_publico, (err, Business) => {
-    if (err) {
-      console.error("Error al crear el negocio:", err);
-      res.status(500).json({ error: "Error interno del servidor" });
-    } else {
-      res.json(Business);
+      res.json(Agencia);
     }
   });
 }
 
-exports.updateBusiness = (req, res) => {
-  const { negocio, lema, facebook, instagram, whatsapp, correo_admin, correo_publico } = req.body;
-  Business.updateBusiness(negocio, lema, facebook, instagram, whatsapp, correo_admin, correo_publico, (err, Business) => {
+exports.crearAgencia = (req, res) => {
+  const { nombre_agencia, ubicacion_agencia } = req.body;
+  Agencia.crearAgencia(nombre_agencia, ubicacion_agencia, (err, Agencia) => {
     if (err) {
-      console.error("Error al actualizar el negocio:", err);
+      console.error("Error al crear la agencia:", err);
       res.status(500).json({ error: "Error interno del servidor" });
     } else {
-      res.json(Business);
+      res.json(Agencia);
+    }
+  });
+}
+
+exports.actualizarAgencia = (req, res) => {
+  const { nombre_agencia, ubicacion_agencia } = req.body;
+  Agencia.actualizarAgencia(nombre_agencia, ubicacion_agencia, (err, Agencia) => {
+    if (err) {
+      console.error("Error al actualizar la agencia:", err);
+      res.status(500).json({ error: "Error interno del servidor" });
+    } else {
+      res.json(Agencia);
+    }
+  });
+}
+
+exports.deleteAgencia = (req, res) => {
+  const { id_agencia } = req.body;
+  Agencia.eliminarAgencia(id_agencia, (err, Agencia) => {
+    if (err) {
+      console.error("Error al eliminar la agencia:", err);
+      res.status(500).json({ error: "Error interno del servidor" });
+    } else {
+      res.json(Agencia);
     }
   });
 }

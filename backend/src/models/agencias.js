@@ -1,9 +1,9 @@
-const poolc = require('../config/db'); // Asegúrate de que la ruta sea correcta
+const poolc = require('../config/db.js'); // Asegúrate de que la ruta sea correcta
 
-const Business = {};
+const Agencia = {};
 
-Business.getBusiness = (callback) => {
-  poolc.query('SELECT * FROM configuracion_negocio', (err, results) => {
+Agencia.obtenerAgencia = (callback) => {
+  poolc.query('SELECT * FROM agencia', (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -12,8 +12,8 @@ Business.getBusiness = (callback) => {
   });
 };
 
-Business.createBusiness = (callback) => {
-  poolc.query('INSERT INTO configuracion_negocio (negocio, lema, facebook, instagram, whatsapp, correo_admin, correo_publico) VALUES ($1, $2, $3, $4, $5, $6, $7)', (err, results) => {
+Agencia.crearAgencia = (callback) => {
+  poolc.query('INSERT INTO agencia (nombre_agencia, ubicacion_agencia) VALUES ($1, $2)', (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -23,14 +23,24 @@ Business.createBusiness = (callback) => {
 
 }
 
-Business.updateBusiness = (callback) => {
-  poolc.query('UPDATE configuracion_negocio SET negocio = $1, lema = $2, facebook = $3, instagram = $4, whatsapp = $5, correo_admin = $6, correo_publico = $7 WHERE id_configuracion = $8', (err, results) => {
+Agencia.actualizarAgencia = (callback) => {
+  poolc.query('UPDATE agencia SET nombre_agencia = $1, ubicacion_agencia = $2 WHERE id_agencia = $8', (err, results) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, results);
     }
   });
-
 }
-module.exports = Business;
+
+Agencia.eliminarAgencia = (callback) => {
+  poolc.query('DELETE FROM agencia WHERE id_agencia = $1', (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+module.exports = Agencia;

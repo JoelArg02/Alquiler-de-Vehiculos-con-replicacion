@@ -4,14 +4,20 @@ const AgenciasController = require('../controllers/agenciasController.js');
 
 
 // Obtener negocios
-router.get('/', AgenciasController.getBusiness);
+router.get('/', AgenciasController.obtenerAgencias);
 
 // Crear un negocio
 
-router.post('/create', AgenciasController.createBusiness);
+router.post('/', AgenciasController.crearAgencia);
 
 // Actualizar negocio
 
-router.put('/update/:id', AgenciasController.updateBusiness);
+router.put('/:id', AgenciasController.actualizarAgencia);
+
+// Eliminar agencia
+
+router.delete('/:id', AgenciasController.deleteAgencia);
+
+
 
 module.exports = router;
