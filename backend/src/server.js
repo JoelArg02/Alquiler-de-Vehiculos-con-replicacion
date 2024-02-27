@@ -4,6 +4,10 @@ const app = express();
 const port = 3000;
 
 const agenciaRoutes = require('./routes/agenciaRoutes.js');
+const alquilerRoutes = require('./routes/alquieresRoutes.js');
+const clienteRoutes = require('./routes/clientesRoutes.js');
+const vehiculoRoutes = require('./routes/vehiculosRoutes.js');
+
 
 app.use(
   cors({
@@ -15,9 +19,22 @@ app.use(
 
 
 // rutas
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // Ruta de Negocios
-app.use('/api/agencias', agenciaRoutes);
+app.use('/apiv1/agencias', agenciaRoutes);
+
+// Rutas de alquier
+app.use('/apiv1/alquiler', alquilerRoutes);
+
+// Rutas de clientes
+app.use('/apiv1/clientes', clienteRoutes);
+
+// Rutas de vehiculos
+
+app.use('/apiv1/vehiculos', vehiculoRoutes);
 
 app.set("trust proxy", true); // trust first proxy
 
@@ -52,3 +69,5 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   console.log(`Servidor Express corriendo en el puerto ${port}`);
 });
+
+module.exports = app;
