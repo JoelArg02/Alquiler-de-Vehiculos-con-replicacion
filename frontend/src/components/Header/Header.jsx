@@ -43,12 +43,12 @@ const Header = () => {
               <div className="header__top__left">
                 <span>Necesitas Ayuda?</span>
                 <span className="header__top__help">
-                  <i class="ri-phone-fill"></i> +593 995064852
+                  <i class="ri-phone-fill"></i> +593 998500498
                 </span>
               </div>
             </Col>
 
-            <Col lg="6" md="6" sm="6">
+            {/* <Col lg="6" md="6" sm="6">
               <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
                 <Link to="#" className=" d-flex align-items-center gap-1">
                   <i class="ri-login-circle-line"></i> Ingresa
@@ -58,7 +58,7 @@ const Header = () => {
                   <i class="ri-user-line"></i> Registrate
                 </Link>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

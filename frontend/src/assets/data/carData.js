@@ -1,4 +1,4 @@
-// import all images from assets/images directory
+// importación de imágenes desde el directorio assets/images
 import img01 from "../all-images/cars-img/nissan-offer.png";
 import img02 from "../all-images/cars-img/offer-toyota.png";
 import img03 from "../all-images/cars-img/bmw-offer.png";
@@ -15,14 +15,13 @@ const carData = [
     rating: 112,
     carName: "Tesla Malibu",
     imgUrl: img01,
-    model: "Model 3",
+    model: "Modelo 3",
     price: 50,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "Explora el futuro de la conducción con el Tesla Malibu. Diseño innovador, tecnología de punta y rendimiento excepcional, listo para llevarte a donde quieras ir con estilo y eficiencia.",
   },
 
   {
@@ -31,14 +30,13 @@ const carData = [
     rating: 102,
     carName: "Toyota Aventador",
     imgUrl: img02,
-    model: "Model-2022",
+    model: "Modelo-2022",
     price: 50,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "El Toyota Aventador redefine la experiencia al volante con su confort superior y su rendimiento confiable. Perfecto para la ciudad y más allá, descubre la ruta con total seguridad.",
   },
 
   {
@@ -47,14 +45,13 @@ const carData = [
     rating: 132,
     carName: "BMW X3",
     imgUrl: img03,
-    model: "Model-2022",
+    model: "Modelo-2022",
     price: 65,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "Con el BMW X3, el lujo y la potencia se unen para crear una experiencia de conducción sin igual. Equipado con tecnología avanzada y un diseño elegante, está listo para cualquier aventura.",
   },
 
   {
@@ -63,14 +60,13 @@ const carData = [
     rating: 102,
     carName: "Nissan Mercielago",
     imgUrl: img04,
-    model: "Model-2022",
+    model: "Modelo-2022",
     price: 70,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "Nissan Mercielago, la combinación perfecta de rendimiento y economía. Un vehículo diseñado para el conductor moderno, ofreciendo comodidad, eficiencia y un manejo suave.",
   },
 
   {
@@ -79,14 +75,13 @@ const carData = [
     rating: 94,
     carName: "Ferrari Camry",
     imgUrl: img05,
-    model: "Model-2022",
+    model: "Modelo-2022",
     price: 45,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "El Ferrari Camry te invita a vivir la pasión de la velocidad con un toque de elegancia y exclusividad. Un coche que combina rendimiento excepcional con el lujo italiano por excelencia.",
   },
 
   {
@@ -95,14 +90,13 @@ const carData = [
     rating: 119,
     carName: "Mercedes Benz XC90",
     imgUrl: img06,
-    model: "Model-2022",
+    model: "Modelo-2022",
     price: 85,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "Mercedes Benz XC90, donde la sofisticación se encuentra con la innovación. Disfruta de una experiencia de conducción superior con tecnología de vanguardia y un confort inigualable.",
   },
 
   {
@@ -111,14 +105,13 @@ const carData = [
     rating: 82,
     carName: "Audi Fiesta",
     imgUrl: img07,
-    model: "Model 3",
+    model: "Modelo 3",
     price: 50,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "Audi Fiesta, el equilibrio perfecto entre rendimiento y diseño. Un vehículo que ofrece una experiencia de conducción emocionante y segura, ideal para aquellos que valoran la ingeniería alemana.",
   },
 
   {
@@ -127,14 +120,13 @@ const carData = [
     rating: 52,
     carName: "Rolls Royce Colorado",
     imgUrl: img08,
-    model: "Model 3",
+    model: "Modelo 3",
     price: 50,
     speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: "Automático",
+    description: "Descubre el lujo sin precedentes con el Rolls Royce Colorado. Un vehículo que establece nuevos estándares en comodidad, rendimiento y opulencia, diseñado para quienes buscan lo extraordinario.",
   },
 ];
 

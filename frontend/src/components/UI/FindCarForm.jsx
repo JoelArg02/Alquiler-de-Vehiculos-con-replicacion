@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/find-car-form.css";
-import "../../styles/find-car-form.css";
 import { Form, FormGroup } from "reactstrap";
 
 const FindCarForm = () => {
@@ -29,8 +28,8 @@ const FindCarForm = () => {
         </FormGroup>
         <FormGroup className="select__group">
           <select>
-            <option value="ac">AC Car</option>
-            <option value="non-ac">Non AC Car</option>
+            <option value="ac">Incluido Aire Acondicionado</option>
+            <option value="non-ac">Sin Aire Acondicionado</option>
           </select>
         </FormGroup>
 

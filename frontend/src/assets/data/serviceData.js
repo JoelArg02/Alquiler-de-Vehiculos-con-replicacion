@@ -1,44 +1,44 @@
 const serviceData = [
   {
     id: 1,
-    title: "City Transfer",
+    title: "Traslado en la Ciudad",
     icon: "ri-map-pin-2-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Explora la ciudad con facilidad y comodidad con nuestros traslados urbanos. Disfruta de un viaje sin complicaciones, perfecto para turistas y residentes por igual.",
   },
 
   {
     id: 2,
-    title: "Whole  City Tour",
+    title: "Tour Completo por la Ciudad",
     icon: "ri-community-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Sumérgete en la belleza y la historia de la ciudad con nuestro tour completo. Descubre los secretos y las joyas ocultas con la guía de expertos locales.",
   },
 
   {
     id: 3,
-    title: "Unlimited Miles Car Rental",
+    title: "Alquiler de Coches sin Límite de Kilómetros",
     icon: "ri-roadster-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Recorre sin límites con nuestro servicio de alquiler de coches. Libertad total para explorar a tu propio ritmo, sin preocuparte por la distancia.",
   },
 
   {
     id: 4,
-    title: "Fast & Easy Booking",
+    title: "Reserva Rápida y Fácil",
     icon: "ri-timer-flash-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Reserva tu próximo viaje con facilidad. Un proceso rápido y sin complicaciones para garantizar tu comodidad y satisfacción.",
   },
 
   {
     id: 5,
-    title: "Many Pickup Locations",
+    title: "Varias Ubicaciones de Recogida",
     icon: "ri-map-pin-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Convenientemente ubicados, ofrecemos múltiples puntos de recogida para facilitarte el acceso a nuestros servicios desde cualquier lugar.",
   },
 
   {
     id: 6,
-    title: "Airport Transfer",
+    title: "Traslado al Aeropuerto",
     icon: "ri-flight-takeoff-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Comienza y termina tu viaje de la manera más relajada con nuestros traslados al aeropuerto. Servicio puntual y confortable para tu tranquilidad.",
   },
 ];
 

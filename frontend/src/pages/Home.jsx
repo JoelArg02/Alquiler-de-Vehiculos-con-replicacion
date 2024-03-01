@@ -9,7 +9,6 @@ import AboutSection from "../components/UI/AboutSection";
 import ServicesList from "../components/UI/ServicesList";
 import carData from "../assets/data/carData";
 import CarItem from "../components/UI/CarItem";
-import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
 
 import BlogList from "../components/UI/BlogList";
@@ -26,7 +25,7 @@ const Home = () => {
             <Row className="form__row">
               <Col lg="4" md="4">
                 <div className="find__cars-left">
-                  <h2>Find your best car here</h2>
+                  <h2>Encuentra las mejores ofertas aqui</h2>
                 </div>
               </Col>
 
@@ -44,8 +43,8 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">See our</h6>
-              <h2 className="section__title">Popular Services</h2>
+              <h6 className="section__subtitle">Nuestros</h6>
+              <h2 className="section__title">Servicios Populares</h2>
             </Col>
 
             <ServicesList />
@@ -57,8 +56,8 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="text-center mb-5">
-              <h6 className="section__subtitle">Come with</h6>
-              <h2 className="section__title">Hot Offers</h2>
+              <h6 className="section__subtitle">Nuestras</h6>
+              <h2 className="section__title">Ofertas Populares</h2>
             </Col>
 
             {carData.slice(0, 6).map((item) => (
@@ -67,16 +66,15 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-      {/* =========== become a driver section ============ */}
-      <BecomeDriverSection />
+
 
       {/* =========== testimonial section =========== */}
       <section>
         <Container>
           <Row>
             <Col lg="12" className="mb-4 text-center">
-              <h6 className="section__subtitle">Our clients says</h6>
-              <h2 className="section__title">Testimonials</h2>
+              <h6 className="section__subtitle">Testimonios</h6>
+              <h2 className="section__title">De Clientes</h2>
             </Col>
 
             <Testimonial />
@@ -89,8 +87,8 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">Explore our blogs</h6>
-              <h2 className="section__title">Latest Blogs</h2>
+              <h6 className="section__subtitle">Revisa nuestros blogs</h6>
+              <h2 className="section__title">Últimos Blogs</h2>
             </Col>
 
             <BlogList />
