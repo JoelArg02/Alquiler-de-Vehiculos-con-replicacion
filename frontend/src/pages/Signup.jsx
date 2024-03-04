@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+const URL = "http://localhost:5000/api/v1/clientes";
 
 const Signup = () => {
   const [nombres, setNombres] = useState("");
@@ -8,38 +11,16 @@ const Signup = () => {
   const [telefono, setTelefono] = useState("");
   const [direccion, setDireccion] = useState("");
   const [correo, setCorreo] = useState("");
+  const [registroExitoso, setRegistroExitoso] = useState(false); // Estado para controlar si el registro ha sido exitoso
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    crearUsuario();
-    console.log("Nombres:", nombres);
-    console.log("Apellidos:", apellidos);
-    console.log("Teléfono:", telefono);
-    console.log("Dirección:", direccion);
-    console.log("Correo:", correo);
-  };
-
-  const crearUsuario = async () => {
     try {
-      const response = await fetch("/api/usuarios", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          nombres,
-          apellidos,
-          telefono,
-          direccion,
-          correo
-        })
-      });
-      if (!response.ok) {
-        throw new Error("Error al crear usuario");
-      }
-      // Aquí podrías manejar la respuesta si lo necesitas
+      await axios.post(URL, { nombres, apellidos, telefono, direccion, correo });
+      setRegistroExitoso(true); // Establecer el estado de registro exitoso como verdadero
     } catch (error) {
-      console.error("Error al crear usuario:", error);
+      console.error("Error al registrar:", error);
+      // Aquí puedes manejar el error de manera adecuada si la solicitud falla
     }
   };
 
@@ -47,6 +28,8 @@ const Signup = () => {
     <Container>
       <Row className="justify-content-center mt-5">
         <Col lg="6">
+        {!registroExitoso && ( // Mostrar el formulario solo si el registro no ha sido exitoso
+            <>
           <h2 className="text-center mb-4">Registrarse</h2>
           <Form onSubmit={handleSignup}>
             <FormGroup>
@@ -109,6 +92,14 @@ const Signup = () => {
           <div className="text-center mt-3">
             <p>¿Ya tienes una cuenta? <Link to="/login">Iniciar Sesión</Link></p>
           </div>
+          </>
+          )}
+          {registroExitoso && ( // Mostrar el mensaje de agradecimiento solo si el registro ha sido exitoso
+            <div className="alert alert-success" role="alert">
+              ¡Gracias por registrarte!
+
+            </div>
+          )}
         </Col>
       </Row>
     </Container>
