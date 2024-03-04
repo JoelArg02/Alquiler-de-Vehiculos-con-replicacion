@@ -24,17 +24,17 @@ app.get('/health', (req, res) => {
 });
 
 // Ruta de Negocios
-app.use('/apiv1/agencias', agenciaRoutes);
+app.use('/api/v1/agencias', agenciaRoutes);
 
 // Rutas de alquier
-app.use('/apiv1/alquiler', alquilerRoutes);
+app.use('/api/v1/alquiler', alquilerRoutes);
 
 // Rutas de clientes
-app.use('/apiv1/clientes', clienteRoutes);
+app.use('/api/v1/clientes', clienteRoutes);
 
 // Rutas de vehiculos
 
-app.use('/apiv1/vehiculos', vehiculoRoutes);
+app.use('/api/v1/vehiculos', vehiculoRoutes);
 
 app.set("trust proxy", true); // trust first proxy
 
