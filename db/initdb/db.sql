@@ -22,11 +22,18 @@ create table VEHICULO (
    ID_VEHICULO          SERIAL               not null,
    ID_AGENCIA           INT4                 null,
    TIPO_VEHICULOS       VARCHAR(40)          null,
+   IMAGEN_VEHICULO     VARCHAR(100)         null,
    KILOMETRAJE_VEHICULO VARCHAR(10)          null,
+   NOMBRE_VEHICULO      VARCHAR(40)          null,
+   MODELO_VEHICULO      VARCHAR(40)          null,
+   TRANSMISION_VEHICULO VARCHAR(40)          null,
+   RATING_VEHICULO      NUMERIC              null,
+   DESCRIPCION_VEHICULO VARCHAR(100)         null,
    PRECIO_VEHICULO      NUMERIC              null,
    DISPONIBILIDAD_VEHICULO BOOL                 null,
    constraint PK_VEHICULO primary key (ID_VEHICULO)
 );
+
 
 /* Table: ALQUILER */
 create table ALQUILER (

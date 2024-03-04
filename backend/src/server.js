@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = 5000;
 
 const agenciaRoutes = require('./routes/agenciaRoutes.js');
 const alquilerRoutes = require('./routes/alquieresRoutes.js');
@@ -16,6 +16,7 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
+app.use(express.json());
 
 
 // rutas
