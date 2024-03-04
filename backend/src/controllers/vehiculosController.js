@@ -9,30 +9,85 @@ exports.obtenerVehiculos = (req, res) => {
       res.json(vehiculos);
     }
   });
-}
+};
 
 exports.crearVehiculo = (req, res) => {
-  const { id_agencia, tipo_vehiculo, imagen_vehiculo, kilometraje_vehiculo, nombre_vehiculo, modelo_vehiculo, transmision_vehiculo, rating_vehiculo, descripcion_vehiculo, precio_vehiculo, disponibilidad_vehiculo } = req.body;
+  // Convierte el string a booleano correctamente
+  const disponibilidad_Vehiculo = req.body.disponibilidadVehiculo === "true";
 
-  Vehiculo.crearVehiculo(id_agencia, tipo_vehiculo, imagen_vehiculo, kilometraje_vehiculo, nombre_vehiculo, modelo_vehiculo, transmision_vehiculo, rating_vehiculo, descripcion_vehiculo, precio_vehiculo, disponibilidad_vehiculo, (err, vehiculo) => {
-    if (err) {
-      return res.status(500).send(err);
+  // Extrae los demás valores de req.body
+  const {
+    id_agencia,
+    tipo_vehiculo,
+    imagen_vehiculo,
+    kilometraje_vehiculo,
+    nombre_vehiculo,
+    modelo_vehiculo,
+    transmision_vehiculo,
+    rating_vehiculo,
+    descripcion_vehiculo,
+    precio_vehiculo,
+  } = req.body;
+
+  // Ahora pasa disponibilidad_Vehiculo en lugar de disponibilidad_vehiculo
+  Vehiculo.crearVehiculo(
+    id_agencia,
+    tipo_vehiculo,
+    imagen_vehiculo,
+    kilometraje_vehiculo,
+    nombre_vehiculo,
+    modelo_vehiculo,
+    transmision_vehiculo,
+    rating_vehiculo,
+    descripcion_vehiculo,
+    precio_vehiculo,
+    disponibilidad_Vehiculo,
+    (err, vehiculo) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.status(201).json(vehiculo);
     }
-    res.status(201).json(vehiculo);
-  });
+  );
 };
 
 // Controlador para actualizar un vehículo
 exports.actualizarVehiculo = (req, res) => {
   const { idVehiculo } = req.params; // Asumiendo que el ID del vehículo viene como parámetro de la ruta
-  const { idAgencia, tipoVehiculos, imagenVehiculo, kilometraje, nombreVehiculo, modeloVehiculo, transmisionVehiculo, ratingVehiculo, descripcionVehiculo, precio, disponibilidad } = req.body;
+  const {
+    idAgencia,
+    tipoVehiculos,
+    imagenVehiculo,
+    kilometraje,
+    nombreVehiculo,
+    modeloVehiculo,
+    transmisionVehiculo,
+    ratingVehiculo,
+    descripcionVehiculo,
+    precio,
+    disponibilidad,
+  } = req.body;
 
-  Vehiculo.actualizarVehiculo(idVehiculo, idAgencia, tipoVehiculos, imagenVehiculo, kilometraje, nombreVehiculo, modeloVehiculo, transmisionVehiculo, ratingVehiculo, descripcionVehiculo, precio, disponibilidad, (err, vehiculoActualizado) => {
-    if (err) {
-      return res.status(500).send(err);
+  Vehiculo.actualizarVehiculo(
+    idVehiculo,
+    idAgencia,
+    tipoVehiculos,
+    imagenVehiculo,
+    kilometraje,
+    nombreVehiculo,
+    modeloVehiculo,
+    transmisionVehiculo,
+    ratingVehiculo,
+    descripcionVehiculo,
+    precio,
+    disponibilidad,
+    (err, vehiculoActualizado) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.status(200).json(vehiculoActualizado);
     }
-    res.status(200).json(vehiculoActualizado);
-  });
+  );
 };
 
 exports.eliminarVehiculo = (req, res) => {
@@ -45,4 +100,4 @@ exports.eliminarVehiculo = (req, res) => {
       res.json(vehiculo);
     }
   });
-}
+};
