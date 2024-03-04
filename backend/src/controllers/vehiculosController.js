@@ -12,10 +12,7 @@ exports.obtenerVehiculos = (req, res) => {
 };
 
 exports.crearVehiculo = (req, res) => {
-  // Convierte el string a booleano correctamente
   const disponibilidad_Vehiculo = req.body.disponibilidadVehiculo === "true";
-
-  // Extrae los demás valores de req.body
   const {
     id_agencia,
     tipo_vehiculo,
@@ -51,44 +48,47 @@ exports.crearVehiculo = (req, res) => {
   );
 };
 
-// Controlador para actualizar un vehículo
 exports.actualizarVehiculo = (req, res) => {
-  const { idVehiculo } = req.params; // Asumiendo que el ID del vehículo viene como parámetro de la ruta
-  const {
-    idAgencia,
-    tipoVehiculos,
-    imagenVehiculo,
-    kilometraje,
-    nombreVehiculo,
-    modeloVehiculo,
-    transmisionVehiculo,
-    ratingVehiculo,
-    descripcionVehiculo,
-    precio,
-    disponibilidad,
+  const { id } = req.params;
+  let {
+    id_agencia,
+    tipo_vehiculo,
+    imagen_vehiculo,
+    kilometraje_vehiculo,
+    nombre_vehiculo,
+    modelo_vehiculo,
+    transmision_vehiculo,
+    rating_vehiculo,
+    descripcion_vehiculo,
+    precio_vehiculo,
+    disponibilidad_vehiculo,
   } = req.body;
 
+  // Asegurándose de que disponibilidad_vehiculo sea un booleano
+  disponibilidad_vehiculo = disponibilidad_vehiculo === 'true' || disponibilidad_vehiculo === true;
+
   Vehiculo.actualizarVehiculo(
-    idVehiculo,
-    idAgencia,
-    tipoVehiculos,
-    imagenVehiculo,
-    kilometraje,
-    nombreVehiculo,
-    modeloVehiculo,
-    transmisionVehiculo,
-    ratingVehiculo,
-    descripcionVehiculo,
-    precio,
-    disponibilidad,
+    id,
+    id_agencia,
+    tipo_vehiculo,
+    imagen_vehiculo,
+    kilometraje_vehiculo,
+    nombre_vehiculo,
+    modelo_vehiculo,
+    transmision_vehiculo,
+    rating_vehiculo,
+    descripcion_vehiculo,
+    precio_vehiculo,
+    disponibilidad_vehiculo,
     (err, vehiculoActualizado) => {
       if (err) {
-        return res.status(500).send(err);
+        return res.status(500).send({ message: 'Error al actualizar el vehículo', error: err });
       }
       res.status(200).json(vehiculoActualizado);
     }
   );
 };
+
 
 exports.eliminarVehiculo = (req, res) => {
   const { id_vehiculo } = req.body;

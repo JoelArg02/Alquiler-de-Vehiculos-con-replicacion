@@ -7,7 +7,7 @@ const agenciaRoutes = require('./routes/agenciaRoutes.js');
 const alquilerRoutes = require('./routes/alquieresRoutes.js');
 const clienteRoutes = require('./routes/clientesRoutes.js');
 const vehiculoRoutes = require('./routes/vehiculosRoutes.js');
-
+const SpacesRoutes = require('./routes/spacesRoutes.js')
 
 app.use(
   cors({
@@ -23,6 +23,8 @@ app.use(express.json());
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
+
+app.use('/api/v1/spaces', SpacesRoutes);
 
 // Ruta de Negocios
 app.use('/api/v1/agencias', agenciaRoutes);

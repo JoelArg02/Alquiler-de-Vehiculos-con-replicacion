@@ -1,4 +1,4 @@
-const s3 = require("../s3config");
+const s3 = require("../s3config.js");
 const { v4: uuidv4 } = require("uuid");
 
 class SpacesModel {

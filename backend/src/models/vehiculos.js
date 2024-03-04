@@ -52,42 +52,43 @@ Vehiculo.crearVehiculo = (
   );
 };
 
+
 Vehiculo.actualizarVehiculo = (
-  idVehiculo,
-  idAgencia,
-  tipoVehiculos,
-  imagenVehiculo,
-  kilometraje,
-  nombreVehiculo,
-  modeloVehiculo,
-  transmisionVehiculo,
-  ratingVehiculo,
-  descripcionVehiculo,
-  precio,
-  disponibilidad,
-  callback
+  id_vehiculo, // Este es el ID del vehículo a actualizar.
+  id_agencia,
+  tipo_vehiculos,
+  imagen_vehiculo,
+  kilometraje_vehiculo,
+  nombre_vehiculo,
+  modelo_vehiculo,
+  transmision_vehiculo,
+  rating_vehiculo,
+  descripcion_vehiculo,
+  precio_vehiculo,
+  disponibilidad_vehiculo,
+  callback // Función de callback para manejar la respuesta.
 ) => {
   poolc.query(
-    "UPDATE VEHICULO SET ID_AGENCIA = $2, TIPO_VEHICULOS = $3, IMAGEN_VEHICULO = $4, KILOMETRAJE_VEHICULO = $5, NOMBRE_VEHICULO = $6, MODELO_VEHICULO = $7, TRANSMISION_VEHICULO = $8, RATING_VEHICULO = $9, DESCRIPCION_VEHICULO = $10, PRECIO_VEHICULO = $11, DISPONIBILIDAD_VEHICULO = $12 WHERE ID_VEHICULO = $1 RETURNING *",
+    "UPDATE VEHICULO SET ID_AGENCIA = $2, TIPO_VEHICULOS = $3, IMAGEN_VEHICULO = $4, KILOMETRAJE_VEHICULO = $5, NOMBRE_VEHICULO = $6, MODELO_VEHICULO = $7, TRANSMISION_VEHICULO = $8, RATING_VEHICULO = $9, DESCRIPCION_VEHICULO = $10, PRECIO_VEHICULO = $11, DISPONIBILIDAD_VEHICULO = $12 WHERE ID_VEHICULO = $1 RETURNING *;",
     [
-      idVehiculo,
-      idAgencia,
-      tipoVehiculos,
-      imagenVehiculo,
-      kilometraje,
-      nombreVehiculo,
-      modeloVehiculo,
-      transmisionVehiculo,
-      ratingVehiculo,
-      descripcionVehiculo,
-      precio,
-      disponibilidad,
+      id_vehiculo,
+      id_agencia,
+      tipo_vehiculos,
+      imagen_vehiculo,
+      kilometraje_vehiculo,
+      nombre_vehiculo,
+      modelo_vehiculo,
+      transmision_vehiculo,
+      rating_vehiculo,
+      descripcion_vehiculo,
+      precio_vehiculo,
+      disponibilidad_vehiculo,
     ],
     (err, results) => {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, results.rows[0]);
+        callback(null, results.rows[0]); // Retorna el vehículo actualizado.
       }
     }
   );
