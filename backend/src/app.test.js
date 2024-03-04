@@ -17,7 +17,7 @@ describe("API Routes Test", () => {
   });
 });
 
-describe("GET /apiv1/agencias", () => {
+describe("GET /api/v1/agencias", () => {
   test("debe responder con un JSON vacío o con datos", async () => {
     const response = await request(app).get("/apiv1/agencias");
     expect(response.statusCode).toBe(200);
@@ -28,7 +28,7 @@ describe("GET /apiv1/agencias", () => {
   });
 });
 
-describe("GET /apiv1/alquiler", () => {
+describe("GET /api/v1/alquiler", () => {
   test("debe responder con un JSON vacío o con datos", async () => {
     const response = await request(app).get("/apiv1/alquiler");
     expect(response.statusCode).toBe(200);
