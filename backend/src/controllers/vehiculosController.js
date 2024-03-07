@@ -9,34 +9,106 @@ exports.obtenerVehiculos = (req, res) => {
       res.json(vehiculos);
     }
   });
-}
-
-exports.crearVehiculo = (req, res) => {
-  const { id_agencia, tipo_vehiculo, imagen_vehiculo, kilometraje_vehiculo, nombre_vehiculo, modelo_vehiculo, transmision_vehiculo, rating_vehiculo, descripcion_vehiculo, precio_vehiculo, disponibilidad_vehiculo } = req.body;
-
-  Vehiculo.crearVehiculo(id_agencia, tipo_vehiculo, imagen_vehiculo, kilometraje_vehiculo, nombre_vehiculo, modelo_vehiculo, transmision_vehiculo, rating_vehiculo, descripcion_vehiculo, precio_vehiculo, disponibilidad_vehiculo, (err, vehiculo) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.status(201).json(vehiculo);
-  });
 };
 
-// Controlador para actualizar un vehículo
-exports.actualizarVehiculo = (req, res) => {
-  const { idVehiculo } = req.params; // Asumiendo que el ID del vehículo viene como parámetro de la ruta
-  const { idAgencia, tipoVehiculos, imagenVehiculo, kilometraje, nombreVehiculo, modeloVehiculo, transmisionVehiculo, ratingVehiculo, descripcionVehiculo, precio, disponibilidad } = req.body;
+exports.crearVehiculo = (req, res) => {
+  const {
+    id_agencia,
+    tipo_vehiculo,
+    imagen_vehiculo,
+    kilometraje_vehiculo,
+    nombre_vehiculo,
+    modelo_vehiculo,
+    transmision_vehiculo,
+    rating_vehiculo,
+    descripcion_vehiculo,
+    precio_vehiculo,
+    disponibilidad_vehiculo,
+  } = req.body;
 
-  Vehiculo.actualizarVehiculo(idVehiculo, idAgencia, tipoVehiculos, imagenVehiculo, kilometraje, nombreVehiculo, modeloVehiculo, transmisionVehiculo, ratingVehiculo, descripcionVehiculo, precio, disponibilidad, (err, vehiculoActualizado) => {
-    if (err) {
-      return res.status(500).send(err);
+  Vehiculo.crearVehiculo(
+    id_agencia,
+    tipo_vehiculo,
+    imagen_vehiculo,
+    kilometraje_vehiculo,
+    nombre_vehiculo,
+    modelo_vehiculo,
+    transmision_vehiculo,
+    rating_vehiculo,
+    descripcion_vehiculo,
+    precio_vehiculo,
+    disponibilidad_vehiculo,
+    (err, vehiculo) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.status(201).json(vehiculo);
     }
-    res.status(200).json(vehiculoActualizado);
-  });
+  );
+};
+
+exports.actualizarVehiculo = (req, res) => {
+  const { id_vehiculo } = req.params;
+  console.log("id_vehiculo", id_vehiculo);
+  const {
+    idAgencia,
+    tipoVehiculos,
+    imagenVehiculo,
+    kilometraje,
+    nombreVehiculo,
+    modeloVehiculo,
+    transmisionVehiculo,
+    ratingVehiculo,
+    descripcionVehiculo,
+    precio,
+    disponibilidad,
+  } = req.body;
+
+  Vehiculo.actualizarVehiculo(
+    id_vehiculo,
+    idAgencia,
+    tipoVehiculos,
+    imagenVehiculo,
+    kilometraje,
+    nombreVehiculo,
+    modeloVehiculo,
+    transmisionVehiculo,
+    ratingVehiculo,
+    descripcionVehiculo,
+    precio,
+    disponibilidad,
+    (err, vehiculoActualizado) => {
+      if (err) {
+        console.error("Error al actualizar el vehículo:", err);
+
+        // Publicar el mensaje de error detallado para el cliente, asegurándose de no exponer detalles sensibles
+        let errorMessage = "Ocurrió un error al procesar la solicitud.";
+        // Personaliza el mensaje de error basado en el entorno de ejecución
+        if (process.env.NODE_ENV === "development") {
+          // En entorno de desarrollo, puede ser útil ver el mensaje exacto del error
+          errorMessage += ` Detalle: ${err.message}`;
+        } else {
+          // En producción, evita enviar mensajes de error detallados que pueden revelar la lógica interna
+          errorMessage +=
+            " Por favor, revise los datos enviados o intente más tarde.";
+        }
+
+        return res.status(500).json({ error: errorMessage });
+      }
+
+      if (!vehiculoActualizado) {
+        return res.status(404).json({ error: "Vehículo no encontrado." });
+      }
+
+      res.status(200).json(vehiculoActualizado);
+    }
+  );
 };
 
 exports.eliminarVehiculo = (req, res) => {
-  const { id_vehiculo } = req.body;
+  const { id_vehiculo } = req.params;
+  console.log("id_vehiculo", id_vehiculo);
+  
   Vehiculo.eliminarVehiculo(id_vehiculo, (err, vehiculo) => {
     if (err) {
       console.error("Error al eliminar el vehículo:", err);
@@ -45,4 +117,4 @@ exports.eliminarVehiculo = (req, res) => {
       res.json(vehiculo);
     }
   });
-}
+};
