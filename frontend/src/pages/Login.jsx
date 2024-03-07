@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-} from "reactstrap";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -22,12 +13,12 @@ const Login = () => {
     if (username === "admin" && password === "admin") {
       console.log("Login exitoso");
       localStorage.setItem("logeado", "true");
-      localStorage.setItem("admin", "1"); // Guarda
-      navigate("/create-vehicule");
+      // Redirige al usuario a la página principal o dashboard
+      navigate("/administracion"); // Usa navigate en lugar de history.push
     } else {
       console.log("Credenciales incorrectas");
-
-      alert("Credenciales incorrectas");
+      // Aquí puedes manejar el error de credenciales incorrectas
+      alert("Credenciales incorrectas"); // Ejemplo simple, considera usar un método más sofisticado
     }
   };
 
@@ -36,6 +27,7 @@ const Login = () => {
       <Row className="justify-content-center mt-5">
         <Col lg="3">
           <h2 className="text-center mb-4">Iniciar Sesión</h2>
+          <h3 className="text-center mb-4">Solo si eres administrador</h3>
           <Form onSubmit={handleLogin}>
             <FormGroup>
               <Label for="username">Usuario</Label>
@@ -59,14 +51,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
-            <Button color="primary" block>
-              Ingresar
-            </Button>
+            <Button color="primary" block>Ingresar</Button>
           </Form>
           <div className="text-center mt-3">
-            <p>
-              No estás registrado? <Link to="/signup">Regístrate</Link>
-            </p>
           </div>
         </Col>
       </Row>
