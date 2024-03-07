@@ -14,7 +14,7 @@ const Login = () => {
       console.log("Login exitoso");
       localStorage.setItem("logeado", "true");
       // Redirige al usuario a la página principal o dashboard
-      navigate("/dashboard"); // Usa navigate en lugar de history.push
+      navigate("/administracion"); // Usa navigate en lugar de history.push
     } else {
       console.log("Credenciales incorrectas");
       // Aquí puedes manejar el error de credenciales incorrectas
@@ -27,6 +27,7 @@ const Login = () => {
       <Row className="justify-content-center mt-5">
         <Col lg="3">
           <h2 className="text-center mb-4">Iniciar Sesión</h2>
+          <h3 className="text-center mb-4">Solo si eres administrador</h3>
           <Form onSubmit={handleLogin}>
             <FormGroup>
               <Label for="username">Usuario</Label>
@@ -53,7 +54,6 @@ const Login = () => {
             <Button color="primary" block>Ingresar</Button>
           </Form>
           <div className="text-center mt-3">
-            <p>No estás registrado? <Link to="/signup">Regístrate</Link></p>
           </div>
         </Col>
       </Row>

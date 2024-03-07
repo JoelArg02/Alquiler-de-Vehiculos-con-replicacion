@@ -11,6 +11,9 @@ import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import AddCar from "../pages/AddCar";
+import Administracion from "../pages/Administracion";
+import AdminEditCar from "../pages/AdminEditCar";
+import AdminShowCar from "../pages/AdminShowCar";
 
 const Routers = () => {
   return (
@@ -27,6 +30,9 @@ const Routers = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/add-car" element={<AddCar />} />
+      <Route path="/administracion" element={<Administracion />} />
+      <Route path="/adminShowCar" element={<AdminShowCar />} />
+      <Route path="/adminEditCar" element={<AdminEditCar />} />
     </Routes>
   );
 };
