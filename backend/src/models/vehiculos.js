@@ -13,6 +13,20 @@ Vehiculo.obtenerVehiculos = (callback) => {
   });
 };
 
+Vehiculo.obtenerVehiculo = (idVehiculo, callback) => {
+  poolc.query(
+    "SELECT * FROM VEHICULO WHERE id_vehiculo = $1",
+    [idVehiculo], // Asegúrate de pasar el idVehiculo a la consulta
+    (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results.rows);
+      }
+    }
+  );
+};
+
 Vehiculo.crearVehiculo = (
   id_agencia,
   tipo_vehiculo,
@@ -51,7 +65,6 @@ Vehiculo.crearVehiculo = (
     }
   );
 };
-
 
 Vehiculo.actualizarVehiculo = (
   id_vehiculo, // Este es el ID del vehículo a actualizar.

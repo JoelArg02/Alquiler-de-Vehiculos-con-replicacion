@@ -5,6 +5,9 @@ const VehiculoController = require('../controllers/vehiculosController.js'); // 
 // Obtener vehículos
 router.get('/', VehiculoController.obtenerVehiculos);
 
+// Actualizar vehículo
+router.get('/:id_vehiculo', VehiculoController.obtenerVehiculo);
+
 // Crear un vehículo
 router.post('/', VehiculoController.crearVehiculo);
 

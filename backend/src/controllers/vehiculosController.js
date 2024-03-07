@@ -11,6 +11,32 @@ exports.obtenerVehiculos = (req, res) => {
   });
 };
 
+exports.obtenerVehiculo = (req, res) => {
+  const { id_vehiculo } = req.params; 
+
+  Vehiculo.obtenerVehiculo(id_vehiculo, (err, vehiculos) => {
+    if (err) {
+      console.error("Error al obtener el vehículo:", err);
+      
+      if (err.code) {
+        switch (err.code) {
+          case "22P02": 
+            return res.status(400).json({ error: "Formato de ID de vehículo inválido." });
+          default:
+            return res.status(500).json({ error: "Error interno del servidor." });
+        }
+      } else {
+        return res.status(500).json({ error: "Error interno del servidor." });
+      }
+    } else if (vehiculos.length === 0) {
+      return res.status(404).json({ error: "Vehículo no encontrado." });
+    } else {
+      res.json(vehiculos[0]); 
+    }
+  });
+};
+
+
 exports.crearVehiculo = (req, res) => {
   const {
     id_agencia,
