@@ -97,7 +97,7 @@ Vehiculo.actualizarVehiculo = (
 // Eliminar un vehículo
 Vehiculo.eliminarVehiculo = (idVehiculo, callback) => {
   poolc.query(
-    "DELETE FROM VEHICULO WHERE ID_VEHICULO = $1",
+    "DELETE FROM vehiculo WHERE id_vehiculo = $1",
     [idVehiculo],
     (err, results) => {
       if (err) {

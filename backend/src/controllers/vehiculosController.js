@@ -12,7 +12,6 @@ exports.obtenerVehiculos = (req, res) => {
 };
 
 exports.crearVehiculo = (req, res) => {
-  const disponibilidad_Vehiculo = req.body.disponibilidadVehiculo === "true";
   const {
     id_agencia,
     tipo_vehiculo,
@@ -24,9 +23,9 @@ exports.crearVehiculo = (req, res) => {
     rating_vehiculo,
     descripcion_vehiculo,
     precio_vehiculo,
+    disponibilidad_vehiculo,
   } = req.body;
 
-  // Ahora pasa disponibilidad_Vehiculo en lugar de disponibilidad_vehiculo
   Vehiculo.crearVehiculo(
     id_agencia,
     tipo_vehiculo,
@@ -38,7 +37,7 @@ exports.crearVehiculo = (req, res) => {
     rating_vehiculo,
     descripcion_vehiculo,
     precio_vehiculo,
-    disponibilidad_Vehiculo,
+    disponibilidad_vehiculo,
     (err, vehiculo) => {
       if (err) {
         return res.status(500).send(err);
@@ -49,41 +48,58 @@ exports.crearVehiculo = (req, res) => {
 };
 
 exports.actualizarVehiculo = (req, res) => {
-  const { id } = req.params;
-  let {
-    id_agencia,
-    tipo_vehiculo,
-    imagen_vehiculo,
-    kilometraje_vehiculo,
-    nombre_vehiculo,
-    modelo_vehiculo,
-    transmision_vehiculo,
-    rating_vehiculo,
-    descripcion_vehiculo,
-    precio_vehiculo,
-    disponibilidad_vehiculo,
+  const { id_vehiculo } = req.params;
+  console.log("id_vehiculo", id_vehiculo);
+  const {
+    idAgencia,
+    tipoVehiculos,
+    imagenVehiculo,
+    kilometraje,
+    nombreVehiculo,
+    modeloVehiculo,
+    transmisionVehiculo,
+    ratingVehiculo,
+    descripcionVehiculo,
+    precio,
+    disponibilidad,
   } = req.body;
 
-  // Asegurándose de que disponibilidad_vehiculo sea un booleano
-  disponibilidad_vehiculo = disponibilidad_vehiculo === 'true' || disponibilidad_vehiculo === true;
-
   Vehiculo.actualizarVehiculo(
-    id,
-    id_agencia,
-    tipo_vehiculo,
-    imagen_vehiculo,
-    kilometraje_vehiculo,
-    nombre_vehiculo,
-    modelo_vehiculo,
-    transmision_vehiculo,
-    rating_vehiculo,
-    descripcion_vehiculo,
-    precio_vehiculo,
-    disponibilidad_vehiculo,
+    id_vehiculo,
+    idAgencia,
+    tipoVehiculos,
+    imagenVehiculo,
+    kilometraje,
+    nombreVehiculo,
+    modeloVehiculo,
+    transmisionVehiculo,
+    ratingVehiculo,
+    descripcionVehiculo,
+    precio,
+    disponibilidad,
     (err, vehiculoActualizado) => {
       if (err) {
-        return res.status(500).send({ message: 'Error al actualizar el vehículo', error: err });
+        console.error("Error al actualizar el vehículo:", err);
+
+        // Publicar el mensaje de error detallado para el cliente, asegurándose de no exponer detalles sensibles
+        let errorMessage = "Ocurrió un error al procesar la solicitud.";
+        // Personaliza el mensaje de error basado en el entorno de ejecución
+        if (process.env.NODE_ENV === "development") {
+          // En entorno de desarrollo, puede ser útil ver el mensaje exacto del error
+          errorMessage += ` Detalle: ${err.message}`;
+        } else {
+          // En producción, evita enviar mensajes de error detallados que pueden revelar la lógica interna
+          errorMessage +=
+            " Por favor, revise los datos enviados o intente más tarde.";
+        }
+
+        return res.status(500).json({ error: errorMessage });
       }
+
+      if (!vehiculoActualizado) {
+        return res.status(404).json({ error: "Vehículo no encontrado." });
+      }
+
       res.status(200).json(vehiculoActualizado);
     }
   );
@@ -91,7 +107,9 @@ exports.actualizarVehiculo = (req, res) => {
 
 
 exports.eliminarVehiculo = (req, res) => {
-  const { id_vehiculo } = req.body;
+  const { id_vehiculo } = req.params;
+  console.log("id_vehiculo", id_vehiculo);
+  
   Vehiculo.eliminarVehiculo(id_vehiculo, (err, vehiculo) => {
     if (err) {
       console.error("Error al eliminar el vehículo:", err);
