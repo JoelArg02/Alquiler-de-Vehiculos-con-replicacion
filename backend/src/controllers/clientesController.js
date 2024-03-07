@@ -12,7 +12,6 @@ exports.obtenerClientes = (req, res) => {
 }
 
 exports.crearCliente = (req, res) => {
-  // Asegúrate de obtener 'cedula' del cuerpo de la solicitud también
   const { cedula, nombres, apellidos, telefono, direccion, correo } = req.body;
   
   // Ahora pasas 'cedula' como el primer argumento a 'crearCliente'
@@ -43,7 +42,7 @@ exports.actualizarCliente = (req, res) => {
 
 
 exports.eliminarCliente = (req, res) => {
-  const { cedula } = req.body;
+  const { cedula } = req.params;
   Cliente.eliminarCliente(cedula, (err, cliente) => {
     if (err) {
       console.error("Error al eliminar el cliente:", err);

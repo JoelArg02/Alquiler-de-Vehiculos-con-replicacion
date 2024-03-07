@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
@@ -30,9 +30,30 @@ const navLinks = [
 
 const Header = () => {
   const menuRef = useRef(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
-
+  useEffect(() => {
+    // Verifica si el usuario es admin
+    const admin = localStorage.getItem("admin");
+    if (admin === "1") {
+      setIsAdmin(true);
+      // Agrega dinámicamente el enlace si el usuario es admin
+      navLinks.push({
+        path: "/add-car",
+        display: "Añadir Vehículo",
+      });
+    } else {
+      // Elimina el enlace "Añadir Vehículo" si no es admin o si el admin cambia
+      const addCarIndex = navLinks.findIndex(
+        (link) => link.display === "Añadir Vehículo"
+      );
+      if (addCarIndex > -1) {
+        navLinks.splice(addCarIndex, 1);
+      }
+      setIsAdmin(false);
+    }
+  }, []);
   return (
     <header className="header">
       {/* ============ header top ============ */}

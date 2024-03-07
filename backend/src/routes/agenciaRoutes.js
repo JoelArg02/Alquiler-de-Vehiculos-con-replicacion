@@ -12,11 +12,11 @@ router.post('/', AgenciasController.crearAgencia);
 
 // Actualizar negocio
 
-router.put('/:id', AgenciasController.actualizarAgencia);
+router.put('/:id_agencia', AgenciasController.actualizarAgencia);
 
 // Eliminar agencia
 
-router.delete('/:id', AgenciasController.deleteAgencia);
+router.delete('/:id_agencia', AgenciasController.deleteAgencia);
 
 
 
