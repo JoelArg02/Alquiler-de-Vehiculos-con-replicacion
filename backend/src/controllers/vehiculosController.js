@@ -105,6 +105,7 @@ exports.actualizarVehiculo = (req, res) => {
   );
 };
 
+
 exports.eliminarVehiculo = (req, res) => {
   const { id_vehiculo } = req.params;
   console.log("id_vehiculo", id_vehiculo);

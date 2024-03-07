@@ -1,11 +1,13 @@
 import axios from "axios";
 import apiConfig from "./apiConfig";
 
+let carData = []; 
+
 const getCarData = async () => {
   try {
     const response = await axios.get(`${apiConfig.baseURL}/v1/vehiculos/`);
     console.log("Se hizo el intento");
-    return response.data; // Devuelve los datos recibidos de la API
+    return response.data;
   } catch (error) {
     console.error("Error al obtener los datos de los vehículos:", error);
     throw error;
@@ -15,30 +17,29 @@ const getCarData = async () => {
 const mapDataToCarData = (apiData) => {
   return apiData.map((item) => ({
     id: item.id_vehiculo,
-    brand: "Marca no especificada", // Aquí deberías ajustar según los datos que tengas disponibles
+    brand: "Marca no especificada",
     rating: parseFloat(item.rating_vehiculo),
     carName: item.nombre_vehiculo,
     imgUrl: item.imagen_vehiculo,
     model: item.modelo_vehiculo,
     price: parseFloat(item.precio_vehiculo),
-    speed: `${item.kilometraje_vehiculo}km`, // Asumiendo que quieras convertir el kilometraje a una cadena de texto
-    gps: "Navegación GPS", // Asumiendo valor estático ya que no está en la data original
-    seatType: "Asientos calefactados", // Asumiendo valor estático ya que no está en la data original
-    automatic:
-      item.transmision_vehiculo === "Automática" ? "Automático" : "Manual", // Ajustar según necesidad
+    speed: `${item.kilometraje_vehiculo}km`,
+    gps: "Navegación GPS",
+    seatType: "Asientos calefactados",
+    automatic: item.transmision_vehiculo === "Automática" ? "Automático" : "Manual",
     description: item.descripcion_vehiculo,
   }));
 };
 
-getCarData()
-  .then((data) => {
-    const carData2 = mapDataToCarData(data);
-    console.log(carData2);
-    console.log("Datos de vehículos procesados con éxito:", carData2);
-  })
-  .catch((error) => {
-    console.error("Error al procesar los datos de los vehículos:", error);
-  });
-
+(async () => {
+  try {
+    const data = await getCarData();
+    const processedData = mapDataToCarData(data);
+    carData.splice(0, carData.length, ...processedData); // Actualiza carData con los nuevos datos
+    console.log("Datos de vehículos actualizados con éxito:", carData);
+  } catch (error) {
+    console.error("Error al actualizar los datos de los vehículos:", error);
+  }
+})();
 
 export default carData;

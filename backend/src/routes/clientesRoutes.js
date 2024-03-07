@@ -4,14 +4,9 @@ const ClienteController = require('../controllers/clientesController.js'); // As
 
 // Obtener clientes
 router.get('/', ClienteController.obtenerClientes);
-
 // Crear un cliente
 router.post('/', ClienteController.crearCliente);
-
-// Actualizar cliente
-router.put('/:id', ClienteController.actualizarCliente);
-
-// Eliminar cliente
-router.delete('/:id', ClienteController.eliminarCliente);
+router.put('/:cedula', ClienteController.actualizarCliente);
+router.delete('/:cedula', ClienteController.eliminarCliente);
 
 module.exports = router;
