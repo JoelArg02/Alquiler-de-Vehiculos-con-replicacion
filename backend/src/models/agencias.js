@@ -12,6 +12,20 @@ Agencia.obtenerAgencia = (callback) => {
   });
 };
 
+Agencia.obtenerAgenciaPorId = (id_agencia, callback) => {
+  poolc.query(
+    "SELECT * FROM agencia WHERE id_agencia = $1",
+    [id_agencia], 
+    (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results.rows);
+      }
+    }
+  );
+};
+
 Agencia.crearAgencia = (nombreAgencia, ubicacionAgencia, callback) => {
   poolc.query(
     "INSERT INTO agencia (nombre_agencia, ubicacion_agencia) VALUES ($1, $2) RETURNING *",

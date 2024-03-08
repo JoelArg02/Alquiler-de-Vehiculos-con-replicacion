@@ -2,17 +2,13 @@ const SpacesModel = require("../models/SpacesModel.js");
 
 class SpacesController {
   constructor() {
-    // Configura aquí el nombre de tu bucket si es necesario
-    this.model = new SpacesModel("nf-xfc-dt"); // Reemplaza 'nf-xfc-dt' con tu nombre de bucket
+    this.model = new SpacesModel("nf-xfc-dt"); 
   }
 
-  // Método para subir un archivo
   async upload(req, res) {
     try {
-      // Asume que 'file' es el campo en tu formulario de subida
       const file = req.file;
 
-      // Llama al método de subida de tu modelo
       const result = await this.model.uploadFile(
         file.buffer,
         file.originalname
@@ -28,12 +24,10 @@ class SpacesController {
     }
   }
 
-  // Método para descargar un archivo
   async download(req, res) {
     try {
-      const fileName = req.params.fileName; // Obtiene el nombre del archivo de los parámetros de la ruta
+      const fileName = req.params.fileName;
 
-      // Llama al método de descarga de tu modelo
       const fileBuffer = await this.model.downloadFile(fileName);
 
       res.status(200).send(fileBuffer);
@@ -47,13 +41,11 @@ class SpacesController {
     }
   }
 
-  // Métodos adicionales para actualizar, eliminar y listar archivos
-  // ...
+ 
   async viewPdf(req, res) {
     try {
-      const fileName = req.params.fileName; // Obtiene el nombre del archivo de los parámetros de la ruta
+      const fileName = req.params.fileName; 
 
-      // Llama al método getFileStream de tu modelo
       const fileStream = await this.model.getFileStream(fileName);
 
       res.setHeader("Content-Type", "application/pdf");

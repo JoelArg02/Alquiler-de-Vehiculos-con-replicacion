@@ -11,6 +11,22 @@ exports.obtenerAgencias = (req, res) => {
   });
 };
 
+exports.obtenerAgenciaPorId = (req, res) => {
+  const { id_agencia } = req.params;
+  Agencia.obtenerAgenciaPorId(id_agencia, (err, Agencia) => {
+    if (err) {
+      console.error("Error al obtener la agencia:", err);
+      res.status(500).json({ error: "Error interno del servidor" });
+    } else {
+      if (Agencia.length === 0) {
+        res.status(404).json({ error: "Agencia no encontrada." });
+      } else {
+        res.json(Agencia[0]);
+      }
+    }
+  });
+};  
+
 exports.crearAgencia = (req, res) => {
   const { nombre_agencia, ubicacion_agencia } = req.body;
   Agencia.crearAgencia(nombre_agencia, ubicacion_agencia, (err, Agencia) => {

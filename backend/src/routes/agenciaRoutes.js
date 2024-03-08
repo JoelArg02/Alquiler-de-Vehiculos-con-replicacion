@@ -6,6 +6,9 @@ const AgenciasController = require('../controllers/agenciasController.js');
 // Obtener negocios
 router.get('/', AgenciasController.obtenerAgencias);
 
+// Obtener negocio por id
+router.get('/:id_agencia', AgenciasController.obtenerAgenciaPorId);
+
 // Crear un negocio
 
 router.post('/', AgenciasController.crearAgencia);
