@@ -37,9 +37,10 @@ create table VEHICULO (
 
 /* Table: ALQUILER */
 create table ALQUILER (
+   ID_ALQUILER          SERIAL               not null,
    ID_VEHICULO          INT4                 not null,
    CEDULA_CLIENTE       INT4                 not null,
    FECHA_INICIO_ALQ     DATE                 not null,
    FECHA_FIN_ALQ        DATE                 not null,
-   constraint PK_ALQUILER primary key (ID_VEHICULO, CEDULA_CLIENTE)
+   constraint PK_ALQUILER primary key (ID_ALQUILER)
 );

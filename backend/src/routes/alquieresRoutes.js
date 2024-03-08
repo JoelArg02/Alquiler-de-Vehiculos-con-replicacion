@@ -6,7 +6,7 @@ const AlquilerController = require('../controllers/alquileresController.js'); //
 router.get('/', AlquilerController.obtenerAlquileres);
 
 // Obtener alquiler por id
-router.get('/alquiler/:id_vehiculo/:cedula_cliente', AlquilerController.obtenerAlquiler);
+router.get('/:id_alquiler', AlquilerController.obtenerAlquiler);
 // Crear un alquiler
 router.post('/', AlquilerController.crearAlquiler);
 

@@ -12,9 +12,9 @@ exports.obtenerAlquileres = (req, res) => {
 };
 
 exports.obtenerAlquiler = (req, res) => {
-  const { id_vehiculo, cedula_cliente } = req.params; // Asume que recibirás estos parámetros en la URL
-
-  Alquiler.obtenerAlquilerPorId(id_vehiculo, cedula_cliente, (err, alquiler) => {
+  const { id_alquiler } = req.params; // Asume que recibirás estos parámetros en la URL
+  console.log(id_alquiler);
+  Alquiler.obtenerAlquilerPorId(id_alquiler, (err, alquiler) => {
     if (err) {
       console.error("Error al obtener el alquiler:", err);
       res.status(500).json({ error: "Error interno del servidor" });

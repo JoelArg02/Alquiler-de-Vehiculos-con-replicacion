@@ -13,10 +13,10 @@ Alquiler.obtenerAlquileres = (callback) => {
   });
 };
 
-Alquiler.obtenerAlquilerPorId = (id_vehiculo, cedula_cliente, callback) => {
+Alquiler.obtenerAlquilerPorId = (id_vehiculo, callback) => {
   poolc.query(
-    "SELECT * FROM ALQUILER WHERE ID_VEHICULO = $1 AND CEDULA_CLIENTE = $2",
-    [id_vehiculo, cedula_cliente],
+    "SELECT * FROM ALQUILER WHERE ID_ALQUILER = $1",
+    [id_vehiculo],
     (err, results) => {
       if (err) {
         callback(err, null);
