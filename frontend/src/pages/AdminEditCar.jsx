@@ -60,7 +60,6 @@ const AdminEditCar = () => {
                                     <td>{vehiculo.disponibilidad_vehiculo ? 'Disponible' : 'No disponible'}</td>
 
                                     <td>
-                                        <Link to="/create"className='btn btn-primary mt-2 mb-2'> Crear</Link>
                                         <Link to={`/edit/${vehiculo._id}`} className='btn btn-info'><i className="fas fa-edit"></i>Editar</Link>
                                         <button onClick={() => deleteVehiculos(vehiculo._id)} className='btn btn-danger'><i className="fas fa-trash-alt"></i>Eliminar</button>
                                     </td>
