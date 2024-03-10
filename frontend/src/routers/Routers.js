@@ -14,6 +14,8 @@ import AddCar from "../pages/AddCar";
 import Administracion from "../pages/Administracion";
 import AdminEditCar from "../pages/AdminEditCar";
 import AdminShowCar from "../pages/AdminShowCar";
+import AdminCreateCar from "../pages/AdminCreateCar";
+import AdminViewCar from "../pages/AdminViewCar";
 
 const Routers = () => {
   return (
@@ -33,6 +35,9 @@ const Routers = () => {
       <Route path="/administracion" element={<Administracion />} />
       <Route path="/adminShowCar" element={<AdminShowCar />} />
       <Route path="/adminEditCar" element={<AdminEditCar />} />
+      <Route path="/adminEditCar/:id" element={<AdminEditCar />} />
+      <Route path="/adminCreateCar" element={<AdminCreateCar />} />
+      <Route path="/adminViewCar/:id" element={<AdminViewCar />} />
     </Routes>
   );
 };

@@ -39,6 +39,7 @@ const AdminShowCar = () => {
     <div className='container'>
             <div className='row'>
                 <div className='col'>
+                <Link to="/adminCreateCar" className='btn btn-success mt-2 mb-2'>Ingresar nuevo vehículo</Link>
                     <table className='table'>
                         <thead className='table-primary'>
                             <tr>
@@ -62,10 +63,10 @@ const AdminShowCar = () => {
                                     <td>{vehiculo.disponibilidad_vehiculo ? 'Disponible' : 'No disponible'}</td>
 
                                     <td>
-                                        <Link to="/create"className='btn btn-primary mt-2 mb-2'> Crear</Link>
-                                        <Link to={`/adminEditCar/${vehiculo.id_vehiculo}`} className='btn btn-info'><i className="fas fa-edit"></i>Editar</Link>
+                                        <Link to={`/adminViewCar/${vehiculo.id_vehiculo}`} className='btn btn-info me-2'><i className="fas fa-eye"></i> Ver</Link>
+                                        <Link to={`/adminEditCar/${vehiculo.id_vehiculo}`} className='btn btn-warning me-2'><i className="fas fa-edit"></i> Editar</Link>
                                         <button onClick={() => deleteVehiculos(vehiculo.id_vehiculo)} className='btn btn-danger'><i className="fas fa-trash-alt"></i>Eliminar</button>
-                                    </td>
+</td>
                                 </tr>
                             ))}
                         </tbody>
