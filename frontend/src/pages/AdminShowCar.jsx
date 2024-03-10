@@ -8,6 +8,8 @@ import {
   ModalFooter,
   FormGroup,
   Label,
+  Col,
+  Row,
   Input,
 } from "reactstrap";
 
@@ -64,7 +66,7 @@ const AdminEditCar = () => {
 
   const handleEdit = async (id_vehiculo) => {
     try {
-      console.log(id_vehiculo); // Asegúrate de que este log muestra el id correcto.
+      console.log(id_vehiculo); // Asegúrate de que esto imprime el ID correcto
       const res = await axios.get(`${URL}${id_vehiculo}`);
       setVehiculoActual(res.data);
       toggleModalEdit();
@@ -92,7 +94,6 @@ const AdminEditCar = () => {
   const handleSubmitEdit = async (e) => {
     e.preventDefault();
     try {
-      // Asegúrate de usar `id_vehiculo` para construir correctamente la URL
       await axios.put(`${URL}${vehiculoActual.id_vehiculo}`, vehiculoActual);
       getVehiculos();
       toggleModalEdit();
@@ -169,8 +170,7 @@ const AdminEditCar = () => {
                       onClick={() => handleEdit(vehiculo.id_vehiculo)}
                     >
                       Editar
-                    </Button>
-
+                    </Button>{" "}
                     <Button
                       color="danger"
                       onClick={() => deleteVehiculos(vehiculo.id_vehiculo)}
@@ -190,107 +190,127 @@ const AdminEditCar = () => {
         <Modal isOpen={modalEdit} toggle={toggleModalEdit}>
           <ModalHeader toggle={toggleModalEdit}>Editar Vehículo</ModalHeader>
           <ModalBody>
-            <FormGroup>
-              <Label for="id_agencia">ID Agencia</Label>
-              <Input
-                type="text"
-                name="id_agencia"
-                value={vehiculoActual.id_agencia}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="tipo_vehiculo">Tipo de Vehículo</Label>
-              <Input
-                type="text"
-                name="tipo_vehiculo"
-                value={vehiculoActual.tipo_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="imagen_vehiculo">Imagen del Vehículo (URL)</Label>
-              <Input
-                type="text"
-                name="imagen_vehiculo"
-                value={vehiculoActual.imagen_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="kilometraje_vehiculo">Kilometraje</Label>
-              <Input
-                type="number"
-                name="kilometraje_vehiculo"
-                value={vehiculoActual.kilometraje_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="nombre_vehiculo">Nombre</Label>
-              <Input
-                type="text"
-                name="nombre_vehiculo"
-                value={vehiculoActual.nombre_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="modelo_vehiculo">Modelo</Label>
-              <Input
-                type="text"
-                name="modelo_vehiculo"
-                value={vehiculoActual.modelo_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="transmision_vehiculo">Transmisión</Label>
-              <Input
-                type="text"
-                name="transmision_vehiculo"
-                value={vehiculoActual.transmision_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="rating_vehiculo">Rating</Label>
-              <Input
-                type="number"
-                name="rating_vehiculo"
-                value={vehiculoActual.rating_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="descripcion_vehiculo">Descripción</Label>
-              <Input
-                type="textarea"
-                name="descripcion_vehiculo"
-                value={vehiculoActual.descripcion_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="precio_vehiculo">Precio</Label>
-              <Input
-                type="number"
-                name="precio_vehiculo"
-                value={vehiculoActual.precio_vehiculo}
-                onChange={handleChangeEdit}
-              />
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="checkbox"
-                  name="disponibilidad_vehiculo"
-                  checked={vehiculoActual.disponibilidad_vehiculo}
-                  onChange={handleChangeEdit}
-                />{" "}
-                Disponibilidad
-              </Label>
-            </FormGroup>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="id_agencia">ID Agencia</Label>
+                  <Input
+                    type="text"
+                    name="id_agencia"
+                    value={vehiculoActual.id_agencia}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="tipo_vehiculo">Tipo de Vehículo</Label>
+                  <Input
+                    type="select"
+                    name="tipo_vehiculo"
+                    value={vehiculoActual.tipo_vehiculo}
+                    onChange={handleChangeEdit}
+                  >
+                    <option value="">Selecciona un tipo de vehículo</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Jeep">Jeep</option>
+                    <option value="Camioneta">Camioneta</option>
+                    <option value="Deportivo">Deportivo</option>
+                    <option value="Compacto">Compacto</option>
+                    <option value="Sedán">Sedán</option>
+                    <option value="Furgoneta">Furgoneta</option>
+                  </Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="imagen_vehiculo">Imagen del Vehículo (URL)</Label>
+                  <Input
+                    type="text"
+                    name="imagen_vehiculo"
+                    value={vehiculoActual.imagen_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="kilometraje_vehiculo">Kilometraje</Label>
+                  <Input
+                    type="number"
+                    name="kilometraje_vehiculo"
+                    value={vehiculoActual.kilometraje_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="descripcion_vehiculo">Descripción</Label>
+                  <Input
+                    type="textarea"
+                    name="descripcion_vehiculo"
+                    value={vehiculoActual.descripcion_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="nombre_vehiculo">Nombre</Label>
+                  <Input
+                    type="text"
+                    name="nombre_vehiculo"
+                    value={vehiculoActual.nombre_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="modelo_vehiculo">Modelo</Label>
+                  <Input
+                    type="text"
+                    name="modelo_vehiculo"
+                    value={vehiculoActual.modelo_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="transmision_vehiculo">Transmisión</Label>
+                  <Input
+                    type="select"
+                    name="transmision_vehiculo"
+                    value={vehiculoActual.transmision_vehiculo}
+                    onChange={handleChangeEdit}
+                  >
+                    <option value="">Selecciona una opción</option>
+                    <option value="Automática">Automática</option>
+                    <option value="Manual">Manual</option>
+                  </Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="rating_vehiculo">Rating</Label>
+                  <Input
+                    type="number"
+                    name="rating_vehiculo"
+                    value={vehiculoActual.rating_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="precio_vehiculo">Precio</Label>
+                  <Input
+                    type="number"
+                    name="precio_vehiculo"
+                    value={vehiculoActual.precio_vehiculo}
+                    onChange={handleChangeEdit}
+                  />
+                </FormGroup>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="checkbox"
+                      name="disponibilidad_vehiculo"
+                      checked={vehiculoActual.disponibilidad_vehiculo}
+                      onChange={handleChangeEdit}
+                    />{" "}
+                    Disponibilidad
+                  </Label>
+                </FormGroup>
+              </Col>
+            </Row>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={handleSubmitEdit}>
@@ -307,118 +327,138 @@ const AdminEditCar = () => {
       <Modal isOpen={modalCreate} toggle={toggleModalCreate}>
         <ModalHeader toggle={toggleModalCreate}>Crear Vehículo</ModalHeader>
         <ModalBody>
-          <FormGroup>
-            <Label for="id_agencia">ID Agencia</Label>
-            <Input
-              type="text"
-              name="id_agencia"
-              id="id_agencia"
-              value={nuevoVehiculo.id_agencia}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="tipo_vehiculo">Tipo de Vehículo</Label>
-            <Input
-              type="text"
-              name="tipo_vehiculo"
-              id="tipo_vehiculo"
-              value={nuevoVehiculo.tipo_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="imagen_vehiculo">Imagen del Vehículo (URL)</Label>
-            <Input
-              type="text"
-              name="imagen_vehiculo"
-              id="imagen_vehiculo"
-              value={nuevoVehiculo.imagen_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="kilometraje_vehiculo">Kilometraje</Label>
-            <Input
-              type="number"
-              name="kilometraje_vehiculo"
-              id="kilometraje_vehiculo"
-              value={nuevoVehiculo.kilometraje_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="nombre_vehiculo">Nombre</Label>
-            <Input
-              type="text"
-              name="nombre_vehiculo"
-              id="nombre_vehiculo"
-              value={nuevoVehiculo.nombre_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="modelo_vehiculo">Modelo</Label>
-            <Input
-              type="text"
-              name="modelo_vehiculo"
-              id="modelo_vehiculo"
-              value={nuevoVehiculo.modelo_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="transmision_vehiculo">Transmisión</Label>
-            <Input
-              type="text"
-              name="transmision_vehiculo"
-              id="transmision_vehiculo"
-              value={nuevoVehiculo.transmision_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="rating_vehiculo">Rating</Label>
-            <Input
-              type="number"
-              name="rating_vehiculo"
-              id="rating_vehiculo"
-              value={nuevoVehiculo.rating_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="descripcion_vehiculo">Descripción</Label>
-            <Input
-              type="textarea"
-              name="descripcion_vehiculo"
-              id="descripcion_vehiculo"
-              value={nuevoVehiculo.descripcion_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="precio_vehiculo">Precio</Label>
-            <Input
-              type="number"
-              name="precio_vehiculo"
-              id="precio_vehiculo"
-              value={nuevoVehiculo.precio_vehiculo}
-              onChange={handleChangeCreate}
-            />
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input
-                type="checkbox"
-                name="disponibilidad_vehiculo"
-                id="disponibilidad_vehiculo"
-                checked={nuevoVehiculo.disponibilidad_vehiculo}
-                onChange={handleChangeCreate}
-              />{" "}
-              Disponibilidad
-            </Label>
-          </FormGroup>
+          <Row form>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="id_agencia">ID Agencia</Label>
+                <Input
+                  type="text"
+                  name="id_agencia"
+                  id="id_agencia"
+                  value={nuevoVehiculo.id_agencia}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="tipo_vehiculo">Tipo de Vehículo</Label>
+                <Input
+                  type="select"
+                  name="tipo_vehiculo"
+                  id="tipo_vehiculo"
+                  value={nuevoVehiculo.tipo_vehiculo}
+                  onChange={handleChangeCreate}
+                >
+                  <option value="">Selecciona un tipo de vehículo</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Jeep">Jeep</option>
+                  <option value="Camioneta">Camioneta</option>
+                  <option value="Deportivo">Deportivo</option>
+                  <option value="Compacto">Compacto</option>
+                  <option value="Sedán">Sedán</option>
+                  <option value="Furgoneta">Furgoneta</option>
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="transmision_vehiculo">Transmisión</Label>
+                <Input
+                  type="select"
+                  name="transmision_vehiculo"
+                  id="transmision_vehiculo"
+                  value={nuevoVehiculo.transmision_vehiculo}
+                  onChange={handleChangeCreate}
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="Automática">Automática</option>
+                  <option value="Manual">Manual</option>
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="rating_vehiculo">Rating</Label>
+                <Input
+                  type="number"
+                  name="rating_vehiculo"
+                  id="rating_vehiculo"
+                  value={nuevoVehiculo.rating_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="descripcion_vehiculo">Descripción</Label>
+                <Input
+                  type="textarea"
+                  name="descripcion_vehiculo"
+                  id="descripcion_vehiculo"
+                  value={nuevoVehiculo.descripcion_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="imagen_vehiculo">Imagen del Vehículo (URL)</Label>
+                <Input
+                  type="text"
+                  name="imagen_vehiculo"
+                  id="imagen_vehiculo"
+                  value={nuevoVehiculo.imagen_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="kilometraje_vehiculo">Kilometraje</Label>
+                <Input
+                  type="number"
+                  name="kilometraje_vehiculo"
+                  id="kilometraje_vehiculo"
+                  value={nuevoVehiculo.kilometraje_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="nombre_vehiculo">Nombre</Label>
+                <Input
+                  type="text"
+                  name="nombre_vehiculo"
+                  id="nombre_vehiculo"
+                  value={nuevoVehiculo.nombre_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="modelo_vehiculo">Modelo</Label>
+                <Input
+                  type="text"
+                  name="modelo_vehiculo"
+                  id="modelo_vehiculo"
+                  value={nuevoVehiculo.modelo_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="precio_vehiculo">Precio</Label>
+                <Input
+                  type="number"
+                  name="precio_vehiculo"
+                  id="precio_vehiculo"
+                  value={nuevoVehiculo.precio_vehiculo}
+                  onChange={handleChangeCreate}
+                />
+              </FormGroup>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    name="disponibilidad_vehiculo"
+                    id="disponibilidad_vehiculo"
+                    checked={nuevoVehiculo.disponibilidad_vehiculo}
+                    onChange={handleChangeCreate}
+                  />{" "}
+                  Disponibilidad
+                </Label>
+              </FormGroup>
+            </Col>
+          </Row>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={handleSubmitCreate}>
