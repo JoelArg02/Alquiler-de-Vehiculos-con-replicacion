@@ -19,10 +19,11 @@ const AdminEditReservation = () => {
   const [modalCreate, setModalCreate] = useState(false);
   const [reservaActual, setReservaActual] = useState(null);
   const [nuevaReserva, setNuevaReserva] = useState({
-    idVehiculo: "",
-    cedulaCliente: "",
-    fechaInicio: "",
-    fechaFin: "",
+    id_alquiler: "",
+    id_vehiculo: "",
+    cedula_cliente: "",
+    fecha_inicio_alq: "",
+    fecha_fin_alq: "",
   });
 
   useEffect(() => {
@@ -38,20 +39,14 @@ const AdminEditReservation = () => {
     }
   };
 
-  const deleteReserva = async (idVehiculo, cedulaCliente) => {
+  const deleteReserva = async (id_alquiler) => {
     try {
-      // Realiza la solicitud DELETE al servidor
-      await axios.delete(`${URL}`, {
-        data: { idVehiculo, cedulaCliente } // Envía los datos en el cuerpo de la solicitud
-      });
-      // Si la eliminación es exitosa, puedes realizar alguna acción adicional, como actualizar la lista de reservas
-      getReservas(); // Por ejemplo, si tienes una función getReservas para actualizar la lista después de eliminar
+      await axios.delete(`${URL}/${id_alquiler}`);
+      getReservas();
     } catch (error) {
-      // Maneja los errores si la solicitud no se completa correctamente
       console.error("Error al eliminar la reserva:", error);
     }
-  
-  };
+  };  
 
   const toggleModalEdit = () => {
     setModalEdit(!modalEdit);
@@ -63,7 +58,6 @@ const AdminEditReservation = () => {
 
   const handleEdit = async (id_alquiler) => {
     try {
-      console.log(id_alquiler);
       const res = await axios.get(`${URL}/${id_alquiler}`);
       setReservaActual(res.data);
       toggleModalEdit();
