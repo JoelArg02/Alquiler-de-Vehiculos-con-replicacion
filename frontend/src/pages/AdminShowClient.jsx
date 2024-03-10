@@ -42,9 +42,9 @@ const AdminEditClient = () => {
     }
   };
 
-  const deleteCliente = async (cedula_cliente) => {
+  const deleteCliente = async (cedula) => {
     try {
-        await axios.delete(`${URL}${cedula_cliente}`);
+        await axios.delete(`${URL}/${cedula}`);
         getClientes();
     } catch (error) {
         console.error("Error al eliminar el cliente:", error);
@@ -63,7 +63,7 @@ const AdminEditClient = () => {
   const handleEdit = async (cedula) => {
     try {
       console.log(cedula); // Asegúrate de que esto imprime la cédula correcta
-      const res = await axios.get(`${URL}${cedula}`);
+      const res = await axios.get(`${URL}/${cedula}`);
       setClienteActual(res.data);
       toggleModalEdit();
     } catch (error) {
@@ -90,7 +90,7 @@ const AdminEditClient = () => {
   const handleSubmitEdit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${URL}${clienteActual.cedula}`, clienteActual);
+      await axios.put(`${URL}/${clienteActual.cedula_cliente}`, clienteActual);
       getClientes();
       toggleModalEdit();
     } catch (error) {
