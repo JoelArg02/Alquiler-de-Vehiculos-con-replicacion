@@ -120,7 +120,7 @@ const AdminEditReservation = () => {
         <thead className="table-primary">
           <tr>
             <th>ID Alquiler</th>
-            <th>ID Vehiculo</th>
+            <th>Vehiculo</th>
             <th>Cédula Cliente</th>
             <th>Fecha Inicio Alquiler</th>
             <th>Fecha Fin Alquiler</th>
@@ -131,7 +131,7 @@ const AdminEditReservation = () => {
           {reservas.map((reserva) => (
             <tr key={reserva.id_alquiler}>
               <td>{reserva.id_alquiler}</td>
-              <td>{reserva.id_vehiculo}</td>
+              <td>{reserva.nombre_vehiculo}</td>
               <td>{reserva.cedula_cliente}</td>
               <td>{reserva.fecha_inicio_alq}</td>
               <td>{reserva.fecha_fin_alq}</td>

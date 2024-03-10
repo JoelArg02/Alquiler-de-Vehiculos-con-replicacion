@@ -4,7 +4,7 @@ const Alquiler = {};
 
 // Leer todos los alquileres
 Alquiler.obtenerAlquileres = (callback) => {
-  poolc.query("SELECT * FROM alquiler", (err, results) => {
+  poolc.query("SELECT A.ID_ALQUILER,V.NOMBRE_VEHICULO,A.CEDULA_CLIENTE,A.FECHA_INICIO_ALQ,A.FECHA_FIN_ALQ FROM ALQUILER A JOIN VEHICULO V ON A.ID_VEHICULO = V.ID_VEHICULO;", (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -12,6 +12,7 @@ Alquiler.obtenerAlquileres = (callback) => {
     }
   });
 };
+
 
 Alquiler.obtenerAlquilerPorId = (id_alquiler, callback) => {
   poolc.query(
