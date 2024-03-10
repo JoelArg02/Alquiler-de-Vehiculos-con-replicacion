@@ -232,12 +232,12 @@ const AdminEditClient = () => {
         <ModalHeader toggle={toggleModalCreate}>Crear Cliente</ModalHeader>
         <ModalBody>
           <FormGroup>
-            <Label for="cedula_cliente">Cédula</Label>
+            <Label for="cedula">Cédula</Label>
             <Input
               type="text"
-              name="cedula_cliente"
-              id="cedula_cliente"
-              value={nuevoCliente.cedula_cliente}
+              name="cedula"
+              id="cedula"
+              value={nuevoCliente.cedula}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -245,9 +245,9 @@ const AdminEditClient = () => {
             <Label for="nombres">Nombres</Label>
             <Input
               type="text"
-              name="nombres_cliente"
+              name="nombres"
               id="nombres"
-              value={nuevoCliente.nombres_cliente}
+              value={nuevoCliente.nombres}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -255,9 +255,9 @@ const AdminEditClient = () => {
             <Label for="apellidos">Apellidos</Label>
             <Input
               type="text"
-              name="apellidos_cliente"
+              name="apellidos"
               id="apellidos"
-              value={nuevoCliente.apellidos_cliente}
+              value={nuevoCliente.apellidos}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -265,9 +265,9 @@ const AdminEditClient = () => {
             <Label for="telefono">Teléfono</Label>
             <Input
               type="text"
-              name="telefono_cliente"
+              name="telefono"
               id="telefono"
-              value={nuevoCliente.telefono_cliente}
+              value={nuevoCliente.telefono}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -275,9 +275,9 @@ const AdminEditClient = () => {
             <Label for="direccion">Dirección</Label>
             <Input
               type="text"
-              name="direccion_cliente"
+              name="direccion"
               id="direccion"
-              value={nuevoCliente.direccion_cliente}
+              value={nuevoCliente.direccion}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -285,9 +285,9 @@ const AdminEditClient = () => {
             <Label for="correo">Correo</Label>
             <Input
               type="text"
-              name="correo_cliente"
+              name="correo"
               id="correo"
-              value={nuevoCliente.correo_cliente}
+              value={nuevoCliente.correo}
               onChange={handleChangeCreate}
             />
           </FormGroup>
