@@ -8,8 +8,6 @@ import {
   ModalFooter,
   FormGroup,
   Label,
-  Col,
-  Row,
   Input,
 } from "reactstrap";
 
@@ -21,12 +19,12 @@ const AdminEditClient = () => {
   const [modalCreate, setModalCreate] = useState(false);
   const [clienteActual, setClienteActual] = useState(null);
   const [nuevoCliente, setNuevoCliente] = useState({
-    cedula: "",
-    nombres: "",
-    apellidos: "",
-    telefono: "",
-    direccion: "",
-    correo: "",
+    cedula_cliente: "",
+    nombres_cliente: "",
+    apellidos_cliente: "",
+    telefono_cliente: "",
+    direccion_cliente: "",
+    correo_cliente: "",
   });
 
   useEffect(() => {
@@ -105,12 +103,12 @@ const AdminEditClient = () => {
       getClientes();
       toggleModalCreate();
       setNuevoCliente({
-        cedula: "",
-        nombres: "",
-        apellidos: "",
-        telefono: "",
-        direccion: "",
-        correo: "",
+        cedula_cliente: "",
+        nombres_cliente: "",
+        apellidos_cliente: "",
+        telefono_cliente: "",
+        direccion_cliente: "",
+        correo_cliente: "",
       });
     } catch (error) {
       console.error("Error al crear el cliente:", error);
@@ -235,9 +233,9 @@ const AdminEditClient = () => {
             <Label for="cedula">Cédula</Label>
             <Input
               type="text"
-              name="cedula"
+              name="cedula_cliente"
               id="cedula"
-              value={nuevoCliente.cedula}
+              value={nuevoCliente.cedula_cliente}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -245,9 +243,9 @@ const AdminEditClient = () => {
             <Label for="nombres">Nombres</Label>
             <Input
               type="text"
-              name="nombres"
+              name="nombres_cliente"
               id="nombres"
-              value={nuevoCliente.nombres}
+              value={nuevoCliente.nombres_cliente}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -255,9 +253,9 @@ const AdminEditClient = () => {
             <Label for="apellidos">Apellidos</Label>
             <Input
               type="text"
-              name="apellidos"
+              name="apellidos_cliente"
               id="apellidos"
-              value={nuevoCliente.apellidos}
+              value={nuevoCliente.apellidos_cliente}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -265,9 +263,9 @@ const AdminEditClient = () => {
             <Label for="telefono">Teléfono</Label>
             <Input
               type="text"
-              name="telefono"
+              name="telefono_cliente"
               id="telefono"
-              value={nuevoCliente.telefono}
+              value={nuevoCliente.telefono_cliente}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -275,9 +273,9 @@ const AdminEditClient = () => {
             <Label for="direccion">Dirección</Label>
             <Input
               type="text"
-              name="direccion"
+              name="direccion_cliente"
               id="direccion"
-              value={nuevoCliente.direccion}
+              value={nuevoCliente.direccion_cliente}
               onChange={handleChangeCreate}
             />
           </FormGroup>
@@ -285,9 +283,9 @@ const AdminEditClient = () => {
             <Label for="correo">Correo</Label>
             <Input
               type="text"
-              name="correo"
+              name="correo_cliente"
               id="correo"
-              value={nuevoCliente.correo}
+              value={nuevoCliente.correo_cliente}
               onChange={handleChangeCreate}
             />
           </FormGroup>
