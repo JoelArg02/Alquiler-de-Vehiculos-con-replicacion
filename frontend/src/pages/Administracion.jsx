@@ -18,7 +18,7 @@ const HomePage = () => {
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/administracion/clientes">
+              <Link to="/adminShowClient">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de clientes</Button>
               </Link>
             </Col>
