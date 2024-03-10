@@ -64,20 +64,50 @@ const AdminEditCar = () => {
         }
     };
 
-    return (
-        <div>
-           <h3>Editar Vehículo</h3>
-           <form onSubmit={updateCar}>
-                <div className='mb-3'>
-                    <label className='form-label'>Agencia</label>
-                    <input
-                        name="id_agencia"
-                        value={car.id_agencia}
-                        onChange={handleInputChange} 
-                        type="text"
-                        className='form-control'
-                        required
-                    />
+    // Procedimiento para eliminar un útil
+    const deleteVehiculos = async (id) => {
+        try {
+            await axios.delete(`${URL}${id}`);
+            getVehiculos();
+        } catch (error) {
+            console.error("Error al eliminar el vehiculo:", error);
+        }
+    };
+
+
+  
+  return (
+    <div className='container'>
+            <div className='row'>
+                <div className='col'>
+                    <table className='table'>
+                        <thead className='table-primary'>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Modelo</th>
+                                <th>Rating</th>
+                                <th>Precio</th>
+                                <th>Disponibilidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {vehiculos.map((vehiculo, index) => (
+                                <tr key={index}>
+                                    <td>{vehiculo.nombre_vehiculo}</td>
+                                    <td>{vehiculo.modelo_vehiculo}</td>
+                                    <td>{vehiculo.rating_vehiculo}</td>
+                                    <td>{vehiculo.precio_vehiculo}</td>
+                                    <td>{vehiculo.disponibilidad_vehiculo ? 'Disponible' : 'No disponible'}</td>
+
+                                    <td>
+                                        <Link to={`/edit/${vehiculo._id}`} className='btn btn-info'><i className="fas fa-edit"></i>Editar</Link>
+                                        <button onClick={() => deleteVehiculos(vehiculo._id)} className='btn btn-danger'><i className="fas fa-trash-alt"></i>Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
 
                 <div className='mb-3'>

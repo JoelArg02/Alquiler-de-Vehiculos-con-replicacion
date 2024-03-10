@@ -42,7 +42,7 @@ Vehiculo.crearVehiculo = (
   callback
 ) => {
   poolc.query(
-    "INSERT INTO VEHICULO (ID_AGENCIA, TIPO_VEHICULOS, IMAGEN_VEHICULO, KILOMETRAJE_VEHICULO, NOMBRE_VEHICULO, MODELO_VEHICULO, TRANSMISION_VEHICULO, RATING_VEHICULO, DESCRIPCION_VEHICULO, PRECIO_VEHICULO, DISPONIBILIDAD_VEHICULO) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
+    "INSERT INTO VEHICULO (ID_AGENCIA, TIPO_VEHICULO, IMAGEN_VEHICULO, KILOMETRAJE_VEHICULO, NOMBRE_VEHICULO, MODELO_VEHICULO, TRANSMISION_VEHICULO, RATING_VEHICULO, DESCRIPCION_VEHICULO, PRECIO_VEHICULO, DISPONIBILIDAD_VEHICULO) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
     [
       id_agencia,
       tipo_vehiculo,
@@ -69,7 +69,7 @@ Vehiculo.crearVehiculo = (
 Vehiculo.actualizarVehiculo = (
   id_vehiculo, // Este es el ID del vehículo a actualizar.
   id_agencia,
-  tipo_vehiculos,
+  tipo_vehiculo,
   imagen_vehiculo,
   kilometraje_vehiculo,
   nombre_vehiculo,
@@ -82,11 +82,11 @@ Vehiculo.actualizarVehiculo = (
   callback // Función de callback para manejar la respuesta.
 ) => {
   poolc.query(
-    "UPDATE VEHICULO SET ID_AGENCIA = $2, TIPO_VEHICULOS = $3, IMAGEN_VEHICULO = $4, KILOMETRAJE_VEHICULO = $5, NOMBRE_VEHICULO = $6, MODELO_VEHICULO = $7, TRANSMISION_VEHICULO = $8, RATING_VEHICULO = $9, DESCRIPCION_VEHICULO = $10, PRECIO_VEHICULO = $11, DISPONIBILIDAD_VEHICULO = $12 WHERE ID_VEHICULO = $1 RETURNING *;",
+    "UPDATE VEHICULO SET ID_AGENCIA = $2, TIPO_VEHICULO = $3, IMAGEN_VEHICULO = $4, KILOMETRAJE_VEHICULO = $5, NOMBRE_VEHICULO = $6, MODELO_VEHICULO = $7, TRANSMISION_VEHICULO = $8, RATING_VEHICULO = $9, DESCRIPCION_VEHICULO = $10, PRECIO_VEHICULO = $11, DISPONIBILIDAD_VEHICULO = $12 WHERE ID_VEHICULO = $1 RETURNING *;",
     [
       id_vehiculo,
       id_agencia,
-      tipo_vehiculos,
+      tipo_vehiculo,
       imagen_vehiculo,
       kilometraje_vehiculo,
       nombre_vehiculo,
