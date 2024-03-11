@@ -1,4 +1,4 @@
-const Alquiler = require("../models/alquileres.js");
+const Alquiler = require("../models/alquileres.js"); // Asegúrate de que la ruta sea correcta
 
 exports.obtenerAlquileres = (req, res) => {
   Alquiler.obtenerAlquileres((err, alquileres) => {
@@ -12,7 +12,7 @@ exports.obtenerAlquileres = (req, res) => {
 };
 
 exports.obtenerAlquiler = (req, res) => {
-  const { id_alquiler } = req.params;
+  const { id_alquiler } = req.params; // Asume que recibirás estos parámetros en la URL
   console.log(id_alquiler);
   Alquiler.obtenerAlquilerPorId(id_alquiler, (err, alquiler) => {
     if (err) {
@@ -27,13 +27,12 @@ exports.obtenerAlquiler = (req, res) => {
 };
 
 exports.crearAlquiler = (req, res) => {
-  const { id_alquiler, id_vehiculo, cedula_cliente, fecha_inicio_alq, fecha_fin_alq } = req.body;
+  const { idVehiculo, cedulaCliente, fechaInicio, fechaFin } = req.body;
   Alquiler.crearAlquiler(
-    id_alquiler,
-    id_vehiculo,
-    cedula_cliente,
-    fecha_inicio_alq,
-    fecha_fin_alq,
+    idVehiculo,
+    cedulaCliente,
+    fechaInicio,
+    fechaFin,
     (err, alquiler) => {
       if (err) {
         console.error("Error al crear el alquiler:", err);
@@ -46,14 +45,12 @@ exports.crearAlquiler = (req, res) => {
 };
 
 exports.actualizarAlquiler = (req, res) => {
-  const { id_alquiler } = req.params;
-  const { id_vehiculo, cedula_cliente, fecha_inicio_alq, fecha_fin_alq } = req.body;
+  const { idVehiculo, cedulaCliente, fechaInicio, fechaFin } = req.body;
   Alquiler.actualizarAlquiler(
-    id_alquiler,
-    id_vehiculo,
-    cedula_cliente,
-    fecha_inicio_alq,
-    fecha_fin_alq,
+    idVehiculo,
+    cedulaCliente,
+    fechaInicio,
+    fechaFin,
     (err, alquiler) => {
       if (err) {
         console.error("Error al actualizar el alquiler:", err);
@@ -66,8 +63,8 @@ exports.actualizarAlquiler = (req, res) => {
 };
 
 exports.eliminarAlquiler = (req, res) => {
-  const { id_alquiler} = req.params;
-  Alquiler.eliminarAlquiler(id_alquiler, (err, alquiler) => {
+  const { idVehiculo, cedulaCliente } = req.body;
+  Alquiler.eliminarAlquiler(idVehiculo, cedulaCliente, (err, alquiler) => {
     if (err) {
       console.error("Error al eliminar el alquiler:", err);
       res.status(500).json({ error: "Error interno del servidor" });

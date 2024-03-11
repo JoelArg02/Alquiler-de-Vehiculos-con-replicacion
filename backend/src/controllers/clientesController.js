@@ -12,8 +12,8 @@ exports.obtenerClientes = (req, res) => {
 };
 
 exports.ObetnerCliente = (req, res) => {
-  const { cedula_cliente } = req.params;
-  Cliente.ObtenerCliente(cedula_cliente, (err, cliente) => {
+  const { cedula } = req.params;
+  Cliente.ObtenerCliente(cedula, (err, cliente) => {
     if (err) {
       console.error("Error al obtener el cliente:", err);
       res.status(500).json({ error: "Error interno del servidor" });
@@ -28,15 +28,16 @@ exports.ObetnerCliente = (req, res) => {
 };
 
 exports.crearCliente = (req, res) => {
-  const { cedula_cliente, nombres_cliente, apellidos_cliente, telefono_cliente, direccion_cliente, correo_cliente } = req.body;
+  const { cedula, nombres, apellidos, telefono, direccion, correo } = req.body;
 
+  // Ahora pasas 'cedula' como el primer argumento a 'crearCliente'
   Cliente.crearCliente(
-    cedula_cliente,
-    nombres_cliente,
-    apellidos_cliente,
-    telefono_cliente,
-    direccion_cliente,
-    correo_cliente,
+    cedula,
+    nombres,
+    apellidos,
+    telefono,
+    direccion,
+    correo,
     (err, cliente) => {
       if (err) {
         console.error("Error al crear el cliente:", err);
@@ -49,17 +50,17 @@ exports.crearCliente = (req, res) => {
 };
 
 exports.actualizarCliente = (req, res) => {
-  const { cedula_cliente } = req.params;
-  console.log(cedula_cliente);
-  const { nombres_cliente, apellidos_cliente, telefono_cliente, direccion_cliente, correo_cliente } = req.body;
+  const { cedula } = req.params;
+  console.log(cedula);
+  const { nombres, apellidos, telefono, direccion, correo } = req.body;
 
   Cliente.actualizarCliente(
-    cedula_cliente,
-    nombres_cliente,
-    apellidos_cliente,
-    telefono_cliente,
-    direccion_cliente,
-    correo_cliente,
+    cedula,
+    nombres,
+    apellidos,
+    telefono,
+    direccion,
+    correo,
     (err, cliente) => {
       if (err) {
         console.error("Error al actualizar el cliente:", err);
@@ -72,8 +73,8 @@ exports.actualizarCliente = (req, res) => {
 };
 
 exports.eliminarCliente = (req, res) => {
-  const { cedula_cliente } = req.params;
-  Cliente.eliminarCliente(cedula_cliente, (err, cliente) => {
+  const { cedula } = req.params;
+  Cliente.eliminarCliente(cedula, (err, cliente) => {
     if (err) {
       console.error("Error al eliminar el cliente:", err);
       res.status(500).json({ error: "Error interno del servidor" });

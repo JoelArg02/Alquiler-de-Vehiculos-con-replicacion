@@ -16,9 +16,7 @@ import AdminEditCar from "../pages/AdminEditCar";
 import AdminShowCar from "../pages/AdminShowCar";
 import AdminCreateCar from "../pages/AdminCreateCar";
 import AdminViewCar from "../pages/AdminViewCar";
-import AdminShowClient from "../pages/AdminShowClient";
-import AdminShowAlquiler from "../pages/AdminShowAlquiler";
-import AdminShowAgencia from "../pages/AdminShowAgencia";
+
 const Routers = () => {
   return (
     <Routes>
@@ -40,9 +38,6 @@ const Routers = () => {
       <Route path="/adminEditCar/:id" element={<AdminEditCar />} />
       <Route path="/adminCreateCar" element={<AdminCreateCar />} />
       <Route path="/adminViewCar/:id" element={<AdminViewCar />} />
-      <Route path="/adminShowClient" element={<AdminShowClient />} />
-      <Route path="/adminShowAlquiler" element={<AdminShowAlquiler />} />
-      <Route path="/adminShowAgencia" element={<AdminShowAgencia />} />
     </Routes>
   );
 };

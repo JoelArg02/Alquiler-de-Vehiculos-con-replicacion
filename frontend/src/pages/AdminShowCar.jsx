@@ -153,7 +153,7 @@ const AdminEditCar = () => {
           <table className="table">
             <thead className="table-primary">
               <tr>
-                <th>Agencia</th>
+                <th>ID Agencia</th>
                 <th>Tipo</th>
                 <th>Imagen</th>
                 <th>Kilometraje</th>
@@ -170,7 +170,7 @@ const AdminEditCar = () => {
             <tbody>
               {vehiculos.map((vehiculo) => (
                 <tr key={vehiculo._id}>
-                  <td>{vehiculo.nombre_agencia}</td>
+                  <td>{vehiculo.id_agencia}</td>
                   <td>{vehiculo.tipo_vehiculo}</td>
                   <td>{vehiculo.imagen_vehiculo}</td>
                   <td>{vehiculo.kilometraje_vehiculo}</td>

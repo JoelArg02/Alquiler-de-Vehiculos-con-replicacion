@@ -11,9 +11,9 @@ router.get('/:id_alquiler', AlquilerController.obtenerAlquiler);
 router.post('/', AlquilerController.crearAlquiler);
 
 // Actualizar alquiler
-router.put('/:id_alquiler', AlquilerController.actualizarAlquiler);
+router.put('/:id', AlquilerController.actualizarAlquiler);
 
 // Eliminar alquiler
-router.delete('/:id_alquiler', AlquilerController.eliminarAlquiler);
+router.delete('/:id', AlquilerController.eliminarAlquiler);
 
 module.exports = router;
