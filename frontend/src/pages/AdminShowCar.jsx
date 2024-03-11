@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import {
   Button,
@@ -17,11 +19,15 @@ import {
 } from "reactstrap";
 
 const URL = "http://localhost:5000/api/v1/vehiculos/";
+const URL_UPLOAD = "http://localhost:5000/api/v1/spaces/upload"; // Asegúrate de cambiar esta URL por la correcta
 
 const AdminEditCar = () => {
   const [vehiculos, setVehiculos] = useState([]);
   const [modalEdit, setModalEdit] = useState(false);
   const [modalCreate, setModalCreate] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const navigate = useNavigate();
+
   const [vehiculoActual, setVehiculoActual] = useState(null);
   const [nuevoVehiculo, setNuevoVehiculo] = useState({
     id_agencia: "",
@@ -147,25 +153,35 @@ const AdminEditCar = () => {
 
   const handleSubmitCreate = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post(URL, nuevoVehiculo);
-      getVehiculos();
-      toggleModalCreate();
-      setNuevoVehiculo({
-        id_agencia: "",
-        tipo_vehiculo: "",
-        imagen_vehiculo: "",
-        kilometraje_vehiculo: "",
-        nombre_vehiculo: "",
-        modelo_vehiculo: "",
-        transmision_vehiculo: "",
-        rating_vehiculo: "",
-        descripcion_vehiculo: "",
-        precio_vehiculo: "",
-        disponibilidad_vehiculo: false,
-      });
-    } catch (error) {
-      console.error("Error al crear el vehiculo:", error);
+
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("file", imageFile);
+
+      try {
+        // Subir la imagen
+        const uploadResponse = await axios.post(URL_UPLOAD, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        // Después de subir, usar la URL de la imagen para crear el vehículo
+        const imageUrl = uploadResponse.data.data.Location;
+        const newVehicleData = {
+          ...nuevoVehiculo,
+          imagen_vehiculo: imageUrl, 
+        };
+        console.log(newVehicleData);
+        await axios.post(URL, newVehicleData);
+        getVehiculos();
+        toggleModalCreate();
+        setNuevoVehiculo({
+        });
+        setImageFile(null); // Resetear el archivo de imagen seleccionado
+      } catch (error) {
+        console.error("Error al subir la imagen o crear el vehículo:", error);
+      }
     }
   };
 
@@ -291,14 +307,15 @@ const AdminEditCar = () => {
                   </Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="imagen_vehiculo">Imagen del Vehículo (URL)</Label>
+                  <Label for="imagen_vehiculo">Imagen del Vehículo</Label>
                   <Input
-                    type="text"
+                    type="file"
                     name="imagen_vehiculo"
-                    value={vehiculoActual.imagen_vehiculo}
-                    onChange={handleChangeEdit}
+                    id="imagen_vehiculo"
+                    onChange={(e) => setImageFile(e.target.files[0])} // Asume el primer archivo seleccionado
                   />
                 </FormGroup>
+
                 <FormGroup>
                   <Label for="kilometraje_vehiculo">Kilometraje</Label>
                   <Input
@@ -466,15 +483,15 @@ const AdminEditCar = () => {
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label for="imagen_vehiculo">Imagen del Vehículo (URL)</Label>
+                <Label for="imagen_vehiculo">Imagen del Vehículo</Label>
                 <Input
-                  type="text"
+                  type="file"
                   name="imagen_vehiculo"
                   id="imagen_vehiculo"
-                  value={nuevoVehiculo.imagen_vehiculo}
-                  onChange={handleChangeCreate}
+                  onChange={(e) => setImageFile(e.target.files[0])} // Asume el primer archivo seleccionado
                 />
               </FormGroup>
+
               <FormGroup>
                 <Label for="kilometraje_vehiculo">Kilometraje</Label>
                 <Input
