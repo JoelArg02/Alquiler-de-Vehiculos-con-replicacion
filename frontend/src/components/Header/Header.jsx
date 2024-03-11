@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-
 import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../../styles/header.css";
 
 const navLinks = [
@@ -31,17 +30,36 @@ const navLinks = [
 const Header = () => {
   const menuRef = useRef(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const navigate = useNavigate(); // Se usa para redirigir al usuario
 
+  useEffect(() => {
+    // Aquí verificamos si el usuario está logueado mirando el localStorage
+    const token = localStorage.getItem("token");
+    setIsLogged(!!token);
+
+    // Añade o remueve el enlace de administración basado en el estado isAdmin
+    const adminLinkIndex = navLinks.findIndex(
+      (link) => link.display === "Administración"
+    );
+    if (token === "1" && adminLinkIndex === -1) {
+      navLinks.push({
+        path: "/administracion",
+        display: "Administración",
+      });
+    } else if (!token && adminLinkIndex !== -1) {
+      navLinks.splice(adminLinkIndex, 1);
+    }
+  }, []);
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
   useEffect(() => {
     // Verifica si el usuario es admin
-    const admin = localStorage.getItem("admin");
+    const admin = localStorage.getItem("token");
     if (admin === "1") {
       setIsAdmin(true);
-      // Agrega dinámicamente el enlace si el usuario es admin
       navLinks.push({
-        path: "/add-car",
-        display: "Añadir Vehículo",
+        path: "/administracion",
+        display: "Administracion",
       });
     } else {
       // Elimina el enlace "Añadir Vehículo" si no es admin o si el admin cambia
@@ -54,6 +72,20 @@ const Header = () => {
       setIsAdmin(false);
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLogged(false);
+    navigate("/home"); // Redirige al usuario a la página de inicio tras cerrar sesión
+    // Actualiza navLinks si es necesario
+    const adminLinkIndex = navLinks.findIndex(
+      (link) => link.display === "Administración"
+    );
+    if (adminLinkIndex !== -1) {
+      navLinks.splice(adminLinkIndex, 1);
+    }
+  };
+
   return (
     <header className="header">
       {/* ============ header top ============ */}
@@ -131,11 +163,17 @@ const Header = () => {
               sm="0"
               className=" d-flex align-items-center justify-content-end "
             >
-              <button className="header__btn btn ">
-                <Link to="/login">
-                  <i class="ri-user-line"></i> Iniciar Sesion
-                </Link>
-              </button>
+              {isLogged ? (
+                <button className="header__btn btn" style={{color:"white"}} onClick={handleLogout}>
+                  <i class="ri-logout-box-r-line"></i> Cerrar Sesión
+                </button>
+              ) : (
+                <button className="header__btn btn ">
+                  <Link to="/login">
+                    <i class="ri-user-line"></i> Iniciar Sesión
+                  </Link>
+                </button>
+              )}
             </Col>
           </Row>
         </Container>
