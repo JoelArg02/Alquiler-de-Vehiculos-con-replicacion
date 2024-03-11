@@ -6,21 +6,28 @@ docker network create redExamen
 docker run --name alquiler_maestro1 --network redExamen -e POSTGRES_PASSWORD=123456 -p 5435:5432 --cpus=1 --memory=500MB -d -v C:\Users\chris\Desktop\Volumenes\proyectoDB\master1\data --ulimit nofile=1024:1024 postgres
 docker exec -it alquiler_maestro1 bash
 
-apt-get update
-apt-get install -y build-essential postgresql-server-dev-all
-apt-get install -y git
-apt-get install -y postgresql-server-dev-15
-apt-get install libgssapi3-heimdal libgssapi-krb5-2
-apt-get install -y build-essential
-apt-get install -y libkrb5-dev
-apt-get install -y libselinux1-dev zlib1g-dev liblz4-dev libxslt1-dev libxml2-dev libpam0g-dev
-apt-get install -y libzstd-dev
-apt-get install -y nano
-apt-get update
-git clone https://github.com/2ndQuadrant/pglogical.git
-cd pglogical
+   apt-get update
+   apt-get install -y build-essential postgresql-server-dev-all
+   apt-get install -y git
+   apt-get install -y postgresql-server-dev-15
+   apt-get install libgssapi3-heimdal libgssapi-krb5-2
+   apt-get install -y build-essential
+   apt-get install -y libkrb5-dev
+   apt-get install -y libselinux1-dev zlib1g-dev liblz4-dev libxslt1-dev libxml2-dev libpam0g-dev
+   apt-get install -y libzstd-dev
+   apt-get install -y nano
+   apt-get update
+   apt-get install -y git
+   git clone https://github.com/2ndQuadrant/pglogical.git
+   cd pglogical
+   apt-get install zlib1g-dev
+   apt-get install libpam0g-dev
+   apt-get install libxslt1-dev
+   apt-get install liblz4-dev
+   apt-get install libzstd-dev
+   apt-get install libselinux1-dev
 
-make && make install
+   make && make install
 
 
 
@@ -36,39 +43,56 @@ CREATE DATABASE alquiler_auto;
 
 #CREACION DE LAS TABLAS
 CREATE TABLE public.agencia (
-   ID_AGENCIA           SERIAL               NOT NULL,
-   NOMBRE_AGENCIA       VARCHAR(20)          NULL,
-   UBICACION_AGENCIA    VARCHAR(20)          NULL,
+   ID_AGENCIA SERIAL NOT NULL,
+   NOMBRE_AGENCIA VARCHAR(20) NULL,
+   UBICACION_AGENCIA VARCHAR(20) NULL,
    CONSTRAINT PK_AGENCIA PRIMARY KEY (ID_AGENCIA)
 );
 
-CREATE TABLE public.alquiler (
-   ID_VEHICULO          INT4                 NOT NULL,
-   CEDULA_CLIENTE       INT4                 NOT NULL,
-   FECHA_INICIO_ALQ     DATE                 NOT NULL,
-   FECHA_FIN_ALQ        DATE                 NOT NULL,
-   CONSTRAINT PK_ALQUILER PRIMARY KEY (ID_VEHICULO, CEDULA_CLIENTE)
-);
-
 CREATE TABLE public.cliente (
-   CEDULA_CLIENTE       SERIAL               NOT NULL,
-   NOMBRES_CLIENTE      VARCHAR(35)          NULL,
-   APELLIDOS_CLIENTE    VARCHAR(35)          NULL,
-   TELEFONO_CLIENTE     VARCHAR(10)          NULL,
-   DIRECCION_CLIENTE    VARCHAR(50)          NULL,
-   CORREO_CLIENTE       VARCHAR(30)          NULL,
+   CEDULA_CLIENTE SERIAL NOT NULL,
+   NOMBRES_CLIENTE VARCHAR(35) NULL,
+   APELLIDOS_CLIENTE VARCHAR(35) NULL,
+   TELEFONO_CLIENTE VARCHAR(10) NULL,
+   DIRECCION_CLIENTE VARCHAR(50) NULL,
+   CORREO_CLIENTE VARCHAR(30) NULL,
    CONSTRAINT PK_CLIENTE PRIMARY KEY (CEDULA_CLIENTE)
 );
 
 CREATE TABLE public.vehiculo (
-   ID_VEHICULO          SERIAL               NOT NULL,
-   ID_AGENCIA           INT4                 NULL,
-   TIPO_VEHICULOS       VARCHAR(40)          NULL,
-   KILOMETRAJE_VEHICULO VARCHAR(10)          NULL,
-   PRECIO_VEHICULO      NUMERIC              NULL,
-   DISPONIBILIDAD_VEHICULO BOOL                 NULL,
-   CONSTRAINT PK_VEHICULO PRIMARY KEY (ID_VEHICULO)
+   ID_VEHICULO SERIAL NOT NULL,
+   ID_AGENCIA INT4 NULL,
+   TIPO_VEHICULO VARCHAR(40) NULL,
+   IMAGEN_VEHICULO CHAR(100) NULL,
+   KILOMETRAJE_VEHICULO VARCHAR(10) NULL,
+   NOMBRE_VEHICULO CHAR(40) NULL,
+   MODELO_VEHICULO CHAR(40) NULL,
+   TRANSMISION_VEHICULO CHAR(40) NULL,
+   RATING_VEHICULO NUMERIC NULL,
+   DESCRIPCION_VEHICULO CHAR(100) NULL,
+   PRECIO_VEHICULO NUMERIC NULL,
+   DISPONIBILIDAD_VEHICULO BOOL NULL,
+   CONSTRAINT PK_VEHICULO PRIMARY KEY (ID_VEHICULO),
+   CONSTRAINT FK_VEHICULO_TIENE_AGENCIA FOREIGN KEY (ID_AGENCIA)
+      REFERENCES public.agencia (ID_AGENCIA)
+      ON DELETE RESTRICT ON UPDATE RESTRICT
 );
+
+CREATE TABLE public.alquiler (
+   ID_ALQUILER SERIAL NOT NULL,
+   ID_VEHICULO INT4 NOT NULL,
+   CEDULA_CLIENTE INT4 NOT NULL,
+   FECHA_INICIO_ALQ DATE NOT NULL,
+   FECHA_FIN_ALQ DATE NOT NULL,
+   CONSTRAINT PK_ALQUILER PRIMARY KEY (ID_ALQUILER),
+   CONSTRAINT FK_ALQUILER_ALQUILER_CLIENTE FOREIGN KEY (CEDULA_CLIENTE)
+      REFERENCES public.cliente (CEDULA_CLIENTE)
+      ON DELETE RESTRICT ON UPDATE RESTRICT,
+   CONSTRAINT FK_ALQUILER_ALQUILER2_VEHICULO FOREIGN KEY (ID_VEHICULO)
+      REFERENCES public.vehiculo (ID_VEHICULO)
+      ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
 
 
 CREATE EXTENSION pglogical;
@@ -127,41 +151,57 @@ psql -h localhost -p 5432 -U postgres
 CREATE DATABASE alquiler_auto;
 \c alquiler_auto;
 #CREACION DE LAS TABLAS
+#CREACION DE LAS TABLAS
 CREATE TABLE public.agencia (
-   ID_AGENCIA           SERIAL               NOT NULL,
-   NOMBRE_AGENCIA       VARCHAR(20)          NULL,
-   UBICACION_AGENCIA    VARCHAR(20)          NULL,
+   ID_AGENCIA SERIAL NOT NULL,
+   NOMBRE_AGENCIA VARCHAR(20) NULL,
+   UBICACION_AGENCIA VARCHAR(20) NULL,
    CONSTRAINT PK_AGENCIA PRIMARY KEY (ID_AGENCIA)
 );
 
-CREATE TABLE public.alquiler (
-   ID_VEHICULO          INT4                 NOT NULL,
-   CEDULA_CLIENTE       INT4                 NOT NULL,
-   FECHA_INICIO_ALQ     DATE                 NOT NULL,
-   FECHA_FIN_ALQ        DATE                 NOT NULL,
-   CONSTRAINT PK_ALQUILER PRIMARY KEY (ID_VEHICULO, CEDULA_CLIENTE)
-);
-
 CREATE TABLE public.cliente (
-   CEDULA_CLIENTE       SERIAL               NOT NULL,
-   NOMBRES_CLIENTE      VARCHAR(35)          NULL,
-   APELLIDOS_CLIENTE    VARCHAR(35)          NULL,
-   TELEFONO_CLIENTE     VARCHAR(10)          NULL,
-   DIRECCION_CLIENTE    VARCHAR(50)          NULL,
-   CORREO_CLIENTE       VARCHAR(30)          NULL,
+   CEDULA_CLIENTE SERIAL NOT NULL,
+   NOMBRES_CLIENTE VARCHAR(35) NULL,
+   APELLIDOS_CLIENTE VARCHAR(35) NULL,
+   TELEFONO_CLIENTE VARCHAR(10) NULL,
+   DIRECCION_CLIENTE VARCHAR(50) NULL,
+   CORREO_CLIENTE VARCHAR(30) NULL,
    CONSTRAINT PK_CLIENTE PRIMARY KEY (CEDULA_CLIENTE)
 );
 
 CREATE TABLE public.vehiculo (
-   ID_VEHICULO          SERIAL               NOT NULL,
-   ID_AGENCIA           INT4                 NULL,
-   TIPO_VEHICULOS       VARCHAR(40)          NULL,
-   KILOMETRAJE_VEHICULO VARCHAR(10)          NULL,
-   PRECIO_VEHICULO      NUMERIC              NULL,
-   DISPONIBILIDAD_VEHICULO BOOL                 NULL,
-   CONSTRAINT PK_VEHICULO PRIMARY KEY (ID_VEHICULO)
+   ID_VEHICULO SERIAL NOT NULL,
+   ID_AGENCIA INT4 NULL,
+   TIPO_VEHICULO VARCHAR(40) NULL,
+   IMAGEN_VEHICULO CHAR(100) NULL,
+   KILOMETRAJE_VEHICULO VARCHAR(10) NULL,
+   NOMBRE_VEHICULO CHAR(40) NULL,
+   MODELO_VEHICULO CHAR(40) NULL,
+   TRANSMISION_VEHICULO CHAR(40) NULL,
+   RATING_VEHICULO NUMERIC NULL,
+   DESCRIPCION_VEHICULO CHAR(100) NULL,
+   PRECIO_VEHICULO NUMERIC NULL,
+   DISPONIBILIDAD_VEHICULO BOOL NULL,
+   CONSTRAINT PK_VEHICULO PRIMARY KEY (ID_VEHICULO),
+   CONSTRAINT FK_VEHICULO_TIENE_AGENCIA FOREIGN KEY (ID_AGENCIA)
+      REFERENCES public.agencia (ID_AGENCIA)
+      ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
+CREATE TABLE public.alquiler (
+   ID_ALQUILER SERIAL NOT NULL,
+   ID_VEHICULO INT4 NOT NULL,
+   CEDULA_CLIENTE INT4 NOT NULL,
+   FECHA_INICIO_ALQ DATE NOT NULL,
+   FECHA_FIN_ALQ DATE NOT NULL,
+   CONSTRAINT PK_ALQUILER PRIMARY KEY (ID_ALQUILER),
+   CONSTRAINT FK_ALQUILER_ALQUILER_CLIENTE FOREIGN KEY (CEDULA_CLIENTE)
+      REFERENCES public.cliente (CEDULA_CLIENTE)
+      ON DELETE RESTRICT ON UPDATE RESTRICT,
+   CONSTRAINT FK_ALQUILER_ALQUILER2_VEHICULO FOREIGN KEY (ID_VEHICULO)
+      REFERENCES public.vehiculo (ID_VEHICULO)
+      ON DELETE RESTRICT ON UPDATE RESTRICT
+);
 
 CREATE EXTENSION pglogical;
 SELECT pg_create_logical_replication_slot('replic1', 'pgoutput'); 
