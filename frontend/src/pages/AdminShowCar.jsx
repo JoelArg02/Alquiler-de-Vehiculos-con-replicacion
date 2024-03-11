@@ -152,7 +152,7 @@ const AdminEditCar = () => {
             </thead>
             <tbody>
               {vehiculos.map((vehiculo) => (
-                <tr key={vehiculo._id}>
+                <tr key={vehiculo.id_vehiculo}>
                   <td>{vehiculo.nombre_agencia}</td>
                   <td>{vehiculo.tipo_vehiculo}</td>
                   <td>{vehiculo.imagen_vehiculo}</td>
