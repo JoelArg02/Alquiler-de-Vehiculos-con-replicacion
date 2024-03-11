@@ -66,8 +66,10 @@ exports.crearVehiculo = (req, res) => {
     disponibilidad_vehiculo,
     (err, vehiculo) => {
       if (err) {
+        console.log("Error al crear el vehículo:", err);
         return res.status(500).send(err);
       }
+      console.log("Vehículo creado:", vehiculo);
       res.status(201).json(vehiculo);
     }
   );

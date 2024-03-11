@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-
-import carData from "../assets/data/carData";
+import carData from "../assets/data/carData"; // Asegúrate de que la ruta sea correcta
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
@@ -9,13 +8,15 @@ import PaymentMethod from "../components/UI/PaymentMethod";
 
 const CarDetails = () => {
   const { slug } = useParams();
-
-  const singleCarItem = carData.find((item) => item.carName === slug);
-
+  
+  const singleCarItem = carData.find((item) => item.carName.trim() === slug);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [singleCarItem]);
 
+  if (!singleCarItem) {
+    return <div>Car not found</div>;
+  }
   return (
     <Helmet title={singleCarItem.carName}>
       <section>
