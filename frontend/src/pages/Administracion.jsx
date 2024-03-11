@@ -5,6 +5,8 @@ import "../styles/administracion.css";
 
 
 const HomePage = () => {
+
+  //const
   return (
     <Container>
       <Row className="justify-content-center mt-5">
