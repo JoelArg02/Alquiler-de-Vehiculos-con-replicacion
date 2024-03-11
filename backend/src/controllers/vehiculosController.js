@@ -51,7 +51,7 @@ exports.crearVehiculo = (req, res) => {
     precio_vehiculo,
     disponibilidad_vehiculo,
   } = req.body;
-
+console.log("req.body", req.body);
   Vehiculo.crearVehiculo(
     id_agencia,
     tipo_vehiculo,

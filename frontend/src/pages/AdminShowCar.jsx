@@ -17,6 +17,7 @@ const URL = "http://localhost:5000/api/v1/vehiculos/";
 
 const AdminEditCar = () => {
   const [vehiculos, setVehiculos] = useState([]);
+  const [agencias, setAgencias] = useState([]);
   const [modalEdit, setModalEdit] = useState(false);
   const [modalCreate, setModalCreate] = useState(false);
   const [vehiculoActual, setVehiculoActual] = useState(null);
@@ -36,6 +37,22 @@ const AdminEditCar = () => {
 
   useEffect(() => {
     getVehiculos();
+  }, []);
+
+  useEffect(() => {
+    const cargarAgencias = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/agencias"
+        );
+        setAgencias(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error al obtener las agencias:", error);
+      }
+    };
+
+    cargarAgencias();
   }, []);
 
   const getVehiculos = async () => {
@@ -193,14 +210,22 @@ const AdminEditCar = () => {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="id_agencia">ID Agencia</Label>
+                  <Label for="id_agencia">Agencia</Label>
                   <Input
-                    type="text"
+                    type="select"
                     name="id_agencia"
-                    value={vehiculoActual.id_agencia}
-                    onChange={handleChangeEdit}
-                  />
+                    value={nuevoVehiculo.id_agencia}
+                    onChange={handleChangeCreate} // Asegúrate de que estés usando handleChangeCreate aquí
+                  >
+                    <option value="">Selecciona una agencia</option>
+                    {agencias.map((agencia) => (
+                      <option key={agencia.id_agencia} value={agencia.id_agencia}>
+                        {agencia.nombre_agencia}
+                      </option>
+                    ))}
+                  </Input>
                 </FormGroup>
+
                 <FormGroup>
                   <Label for="tipo_vehiculo">Tipo de Vehículo</Label>
                   <Input
@@ -330,14 +355,20 @@ const AdminEditCar = () => {
           <Row form>
             <Col md={6}>
               <FormGroup>
-                <Label for="id_agencia">ID Agencia</Label>
+                <Label for="id_agencia">Agencia</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="id_agencia"
-                  id="id_agencia"
-                  value={nuevoVehiculo.id_agencia}
-                  onChange={handleChangeCreate}
-                />
+                  value={agencias.id_agencia}
+                  onChange={handleChangeEdit}
+                >
+                  a<option value="">Selecciona una agencia</option>
+                  {agencias.map((agencia) => (
+                    <option key={agencia._id} value={agencia._id}>
+                      {agencia.nombre_agencia}
+                    </option>
+                  ))}
+                </Input>
               </FormGroup>
               <FormGroup>
                 <Label for="tipo_vehiculo">Tipo de Vehículo</Label>

@@ -1,24 +1,31 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+} from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState(""); // Cambiado de email a username para claridad
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Usa useNavigate para la navegación
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Verifica si las credenciales son correctas
     if (username === "admin" && password === "admin") {
-      console.log("Login exitoso");
       localStorage.setItem("logeado", "true");
-      // Redirige al usuario a la página principal o dashboard
-      navigate("/administracion"); // Usa navigate en lugar de history.push
+      localStorage.setItem("token", "1"); // Guarda el token en localStorage
+      // Navega a '/administracion' con una recarga completa de la página
+      window.location.href = "/administracion";
     } else {
       console.log("Credenciales incorrectas");
-      // Aquí puedes manejar el error de credenciales incorrectas
-      alert("Credenciales incorrectas"); // Ejemplo simple, considera usar un método más sofisticado
+      alert("Credenciales incorrectas");
     }
   };
 
@@ -51,10 +58,11 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
-            <Button color="primary" block>Ingresar</Button>
+            <Button color="primary" block>
+              Ingresar
+            </Button>
           </Form>
-          <div className="text-center mt-3">
-          </div>
+          <div className="text-center mt-3"></div>
         </Col>
       </Row>
     </Container>
