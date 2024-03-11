@@ -192,7 +192,7 @@ const AdminEditCar = () => {
                       color="danger"
                       onClick={() => deleteVehiculos(vehiculo.id_vehiculo)}
                     >
-                      Eliminar Vehiculo
+                      Eliminar
                     </Button>
                   </td>
                 </tr>
