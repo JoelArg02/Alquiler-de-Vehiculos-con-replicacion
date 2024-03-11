@@ -11,6 +11,9 @@ import {
   Col,
   Row,
   Input,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
 
 const URL = "http://localhost:5000/api/v1/vehiculos/";
@@ -33,6 +36,12 @@ const AdminEditCar = () => {
     precio_vehiculo: "",
     disponibilidad_vehiculo: false,
   });
+
+  const [vehiculosFiltrados, setVehiculosFiltrados] = useState([]);
+
+  const [filtro, setFiltro] = useState("");
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [vehiculosPorPagina] = useState(10);
 
   useEffect(() => {
     getVehiculos();
@@ -63,6 +72,40 @@ const AdminEditCar = () => {
   const toggleModalCreate = () => {
     setModalCreate(!modalCreate);
   };
+
+  useEffect(() => {
+    const fetchVehiculos = async () => {
+      try {
+        const res = await axios.get(URL);
+        setVehiculos(res.data);
+        setVehiculosFiltrados(res.data);
+      } catch (error) {
+        console.error("Error al obtener los vehículos:", error);
+      }
+    };
+    fetchVehiculos();
+  }, []);
+
+  const filtrarVehiculos = (texto) => {
+    setFiltro(texto);
+    const filtrados = vehiculos.filter(
+      (vehiculo) =>
+        vehiculo.nombre_vehiculo.toLowerCase().includes(texto.toLowerCase())
+      // Puedes agregar más campos para el filtro aquí
+    );
+    setVehiculosFiltrados(filtrados);
+    setPaginaActual(1); // Resetear a la primera página al filtrar
+  };
+
+  const vehiculosVisibles = () => {
+    const inicio = (paginaActual - 1) * vehiculosPorPagina;
+    const fin = inicio + vehiculosPorPagina;
+    return vehiculosFiltrados.slice(inicio, fin);
+  };
+
+  const totalPaginas = Math.ceil(
+    vehiculosFiltrados.length / vehiculosPorPagina
+  );
 
   const handleEdit = async (id_vehiculo) => {
     try {
@@ -133,6 +176,13 @@ const AdminEditCar = () => {
           <Button color="primary" onClick={toggleModalCreate}>
             Crear Vehículo
           </Button>
+          <Input
+            type="text"
+            placeholder="Filtrar vehículos..."
+            value={filtro}
+            onChange={(e) => filtrarVehiculos(e.target.value)}
+            className="my-3"
+          />
           <table className="table">
             <thead className="table-primary">
               <tr>
@@ -151,7 +201,7 @@ const AdminEditCar = () => {
               </tr>
             </thead>
             <tbody>
-              {vehiculos.map((vehiculo) => (
+              {vehiculosVisibles().map((vehiculo) => (
                 <tr key={vehiculo.id_vehiculo}>
                   <td>{vehiculo.nombre_agencia}</td>
                   <td>{vehiculo.tipo_vehiculo}</td>
@@ -182,6 +232,27 @@ const AdminEditCar = () => {
               ))}
             </tbody>
           </table>
+          <Pagination>
+            <PaginationItem disabled={paginaActual <= 1}>
+              <PaginationLink
+                previous
+                onClick={() => setPaginaActual(paginaActual - 1)}
+              />
+            </PaginationItem>
+            {[...Array(totalPaginas)].map((_, i) => (
+              <PaginationItem active={i + 1 === paginaActual} key={i}>
+                <PaginationLink onClick={() => setPaginaActual(i + 1)}>
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem disabled={paginaActual >= totalPaginas}>
+              <PaginationLink
+                next
+                onClick={() => setPaginaActual(paginaActual + 1)}
+              />
+            </PaginationItem>
+          </Pagination>
         </div>
       </div>
 

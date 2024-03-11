@@ -9,15 +9,25 @@ import {
   FormGroup,
   Label,
   Input,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
 
 const URL = "http://localhost:5000/api/v1/alquiler";
 
 const AdminEditReservation = () => {
   const [reservas, setReservas] = useState([]);
+  const [reservasFiltradas, setReservasFiltradas] = useState([]);
   const [modalEdit, setModalEdit] = useState(false);
   const [modalCreate, setModalCreate] = useState(false);
-  const [reservaActual, setReservaActual] = useState(null);
+  const [reservaActual, setReservaActual] = useState({
+    id_alquiler: "",
+    id_vehiculo: "",
+    cedula_cliente: "",
+    fecha_inicio_alq: "",
+    fecha_fin_alq: "",
+  });
   const [nuevaReserva, setNuevaReserva] = useState({
     id_alquiler: "",
     id_vehiculo: "",
@@ -25,44 +35,33 @@ const AdminEditReservation = () => {
     fecha_inicio_alq: "",
     fecha_fin_alq: "",
   });
+  const [filtro, setFiltro] = useState("");
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [reservasPorPagina] = useState(2);
 
   useEffect(() => {
-    getReservas();
+    const fetchReservas = async () => {
+      try {
+        const res = await axios.get(URL);
+        setReservas(res.data);
+        setReservasFiltradas(res.data);
+      } catch (error) {
+        console.error("Error al obtener las reservas:", error);
+      }
+    };
+    fetchReservas();
   }, []);
-
-  const getReservas = async () => {
-    try {
-      const res = await axios.get(URL);
-      setReservas(res.data);
-    } catch (error) {
-      console.error("Error al obtener las reservas:", error);
-    }
-  };
 
   const deleteReserva = async (id_alquiler) => {
     try {
       await axios.delete(`${URL}/${id_alquiler}`);
-      getReservas();
+      const updatedReservas = reservas.filter(
+        (reserva) => reserva.id_alquiler !== id_alquiler
+      );
+      setReservas(updatedReservas);
+      setReservasFiltradas(updatedReservas);
     } catch (error) {
       console.error("Error al eliminar la reserva:", error);
-    }
-  };  
-
-  const toggleModalEdit = () => {
-    setModalEdit(!modalEdit);
-  };
-
-  const toggleModalCreate = () => {
-    setModalCreate(!modalCreate);
-  };
-
-  const handleEdit = async (id_alquiler) => {
-    try {
-      const res = await axios.get(`${URL}/${id_alquiler}`);
-      setReservaActual(res.data);
-      toggleModalEdit();
-    } catch (error) {
-      console.error("Error al obtener la reserva para editar:", error);
     }
   };
 
@@ -82,12 +81,24 @@ const AdminEditReservation = () => {
     }));
   };
 
+  const handleEdit = async (id_alquiler) => {
+    try {
+      const res = await axios.get(`${URL}/${id_alquiler}`);
+      setReservaActual(res.data);
+      setModalEdit(true);
+    } catch (error) {
+      console.error("Error al obtener la reserva para editar:", error);
+    }
+  };
+
   const handleSubmitEdit = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`${URL}/${reservaActual.id_alquiler}`, reservaActual);
-      getReservas();
-      toggleModalEdit();
+      const updatedReservas = await axios.get(URL);
+      setReservas(updatedReservas.data);
+      setReservasFiltradas(updatedReservas.data);
+      setModalEdit(false);
     } catch (error) {
       console.error("Error al actualizar la reserva:", error);
     }
@@ -97,8 +108,10 @@ const AdminEditReservation = () => {
     e.preventDefault();
     try {
       await axios.post(URL, nuevaReserva);
-      getReservas();
-      toggleModalCreate();
+      const updatedReservas = await axios.get(URL);
+      setReservas(updatedReservas.data);
+      setReservasFiltradas(updatedReservas.data);
+      setModalCreate(false);
       setNuevaReserva({
         id_alquiler: "",
         id_vehiculo: "",
@@ -111,11 +124,69 @@ const AdminEditReservation = () => {
     }
   };
 
+  // Previous useState hooks definitions
+
+  // Toggle function for the Edit Modal
+  const toggleModalEdit = () => {
+    setModalEdit(!modalEdit);
+  };
+
+  // Toggle function for the Create Modal
+  const toggleModalCreate = () => {
+    setModalCreate(!modalCreate);
+  };
+  useEffect(() => {
+    const fetchReservas = async () => {
+      try {
+        const res = await axios.get(URL);
+        setReservas(res.data);
+      } catch (error) {
+        console.error("Error al obtener las reservas:", error);
+      }
+    };
+    fetchReservas();
+  }, []);
+
+  const filtrarReservas = (texto) => {
+    if (!texto) {
+      setFiltro("");
+      return;
+    }
+    const filtrado = reservas.filter((reserva) =>
+      Object.values(reserva).some((valor) =>
+        valor.toString().toLowerCase().includes(texto.toLowerCase())
+      )
+    );
+    setFiltro(texto);
+    setPaginaActual(1);
+    setReservasFiltradas(filtrado);
+  };
+
+  const ultimaReservaIndex = paginaActual * reservasPorPagina;
+  const primeraReservaIndex = ultimaReservaIndex - reservasPorPagina;
+  const reservasActuales = reservas.slice(
+    primeraReservaIndex,
+    ultimaReservaIndex
+  );
+
+  const paginar = (numeroPagina) => setPaginaActual(numeroPagina);
+
+  const numeroDePaginas = [];
+  for (let i = 1; i <= Math.ceil(reservas.length / reservasPorPagina); i++) {
+    numeroDePaginas.push(i);
+  }
+
   return (
     <div className="container">
       <Button color="primary" onClick={toggleModalCreate}>
         Crear Reserva
       </Button>
+      <Input
+        type="text"
+        placeholder="Buscar reservas..."
+        onChange={(e) => filtrarReservas(e.target.value)}
+        className="my-3"
+      />
       <table className="table">
         <thead className="table-primary">
           <tr>
@@ -128,7 +199,7 @@ const AdminEditReservation = () => {
           </tr>
         </thead>
         <tbody>
-          {reservas.map((reserva) => (
+          {reservasActuales.map((reserva) => (
             <tr key={reserva.id_alquiler}>
               <td>{reserva.id_alquiler}</td>
               <td>{reserva.nombre_vehiculo}</td>
@@ -136,10 +207,16 @@ const AdminEditReservation = () => {
               <td>{reserva.fecha_inicio_alq}</td>
               <td>{reserva.fecha_fin_alq}</td>
               <td>
-                <Button color="info" onClick={() => handleEdit(reserva.id_alquiler)}>
+                <Button
+                  color="info"
+                  onClick={() => handleEdit(reserva.id_alquiler)}
+                >
                   Editar
                 </Button>{" "}
-                <Button color="danger" onClick={() => deleteReserva(reserva.id_alquiler)}>
+                <Button
+                  color="danger"
+                  onClick={() => deleteReserva(reserva.id_alquiler)}
+                >
                   Eliminar
                 </Button>
               </td>
@@ -147,7 +224,30 @@ const AdminEditReservation = () => {
           ))}
         </tbody>
       </table>
-
+      <Pagination aria-label="Page navigation example">
+        <PaginationItem disabled={paginaActual === 1}>
+          <PaginationLink first onClick={() => paginar(1)} />
+        </PaginationItem>
+        <PaginationItem disabled={paginaActual === 1}>
+          <PaginationLink previous onClick={() => paginar(paginaActual - 1)} />
+        </PaginationItem>
+        {numeroDePaginas.map((numero) => (
+          <PaginationItem active={numero === paginaActual} key={numero}>
+            <PaginationLink onClick={() => paginar(numero)}>
+              {numero}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+        <PaginationItem disabled={paginaActual === numeroDePaginas.length}>
+          <PaginationLink next onClick={() => paginar(paginaActual + 1)} />
+        </PaginationItem>
+        <PaginationItem disabled={paginaActual === numeroDePaginas.length}>
+          <PaginationLink
+            last
+            onClick={() => paginar(numeroDePaginas.length)}
+          />
+        </PaginationItem>
+      </Pagination>
       {/* Modal para editar */}
       {reservaActual && (
         <Modal isOpen={modalEdit} toggle={toggleModalEdit}>

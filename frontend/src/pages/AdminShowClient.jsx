@@ -9,6 +9,9 @@ import {
   FormGroup,
   Label,
   Input,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
 
 const URL = "http://localhost:5000/api/v1/clientes";
@@ -27,9 +30,18 @@ const AdminEditClient = () => {
     correo_cliente: "",
   });
 
+  const [clientesFiltrados, setClientesFiltrados] = useState([]);
+  // Agregamos estados para el filtro y paginación
+  const [filtro, setFiltro] = useState("");
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [clientesPorPagina] = useState(2);
   useEffect(() => {
     getClientes();
   }, []);
+
+  useEffect(() => {
+    setClientesFiltrados(clientes);
+  }, [clientes]);
 
   const getClientes = async () => {
     try {
@@ -39,16 +51,48 @@ const AdminEditClient = () => {
       console.error("Error al obtener los clientes:", error);
     }
   };
+  const filtrarClientes = (e) => {
+    const textoFiltro = e.target.value;
+    setFiltro(textoFiltro);
+    if (textoFiltro !== "") {
+      const resultadosFiltro = clientes.filter(
+        (cliente) =>
+          cliente.nombres_cliente
+            .toLowerCase()
+            .includes(textoFiltro.toLowerCase()) ||
+          cliente.apellidos_cliente
+            .toLowerCase()
+            .includes(textoFiltro.toLowerCase())
+        // Puedes añadir más campos por los que filtrar
+      );
+      setClientesFiltrados(resultadosFiltro);
+    } else {
+      setClientesFiltrados(clientes);
+    }
+    setPaginaActual(1);
+  };
+
+  const paginar = (numeroPagina) => setPaginaActual(numeroPagina);
+
+  // Calculamos los clientes para la página actual
+  const indexDelUltimoCliente = paginaActual * clientesPorPagina;
+  const indexDelPrimerCliente = indexDelUltimoCliente - clientesPorPagina;
+  const clientesActuales = clientesFiltrados.slice(
+    indexDelPrimerCliente,
+    indexDelUltimoCliente
+  );
+
+  // Calculamos el número total de páginas
+  const numeroPaginas = Math.ceil(clientesFiltrados.length / clientesPorPagina);
 
   const deleteCliente = async (cedula) => {
     try {
-        await axios.delete(`${URL}/${cedula}`);
-        getClientes();
+      await axios.delete(`${URL}/${cedula}`);
+      getClientes();
     } catch (error) {
-        console.error("Error al eliminar el cliente:", error);
+      console.error("Error al eliminar el cliente:", error);
     }
-    };
-
+  };
 
   const toggleModalEdit = () => {
     setModalEdit(!modalEdit);
@@ -56,7 +100,7 @@ const AdminEditClient = () => {
 
   const toggleModalCreate = () => {
     setModalCreate(!modalCreate);
-    };
+  };
 
   const handleEdit = async (cedula) => {
     try {
@@ -120,6 +164,13 @@ const AdminEditClient = () => {
       <Button color="primary" onClick={toggleModalCreate}>
         Crear Cliente
       </Button>
+      <Input
+        type="text"
+        placeholder="Buscar clientes..."
+        value={filtro}
+        onChange={filtrarClientes}
+        className="my-3"
+      />
       <table className="table">
         <thead className="table-primary">
           <tr>
@@ -133,7 +184,7 @@ const AdminEditClient = () => {
           </tr>
         </thead>
         <tbody>
-          {clientes.map((cliente) => (
+          {clientesFiltrados.map((cliente) => (
             <tr key={cliente.cedula_cliente}>
               <td>{cliente.cedula_cliente}</td>
               <td>{cliente.nombres_cliente}</td>
@@ -142,10 +193,16 @@ const AdminEditClient = () => {
               <td>{cliente.direccion_cliente}</td>
               <td>{cliente.correo_cliente}</td>
               <td>
-                <Button color="info" onClick={() => handleEdit(cliente.cedula_cliente)}>
+                <Button
+                  color="info"
+                  onClick={() => handleEdit(cliente.cedula_cliente)}
+                >
                   Editar
                 </Button>{" "}
-                <Button color="danger" onClick={() => deleteCliente(cliente.cedula_cliente)}>
+                <Button
+                  color="danger"
+                  onClick={() => deleteCliente(cliente.cedula_cliente)}
+                >
                   Eliminar
                 </Button>
               </td>
@@ -153,7 +210,27 @@ const AdminEditClient = () => {
           ))}
         </tbody>
       </table>
-
+      <Pagination>
+        <PaginationItem disabled={paginaActual <= 1}>
+          <PaginationLink first onClick={() => paginar(1)} />
+        </PaginationItem>
+        <PaginationItem disabled={paginaActual <= 1}>
+          <PaginationLink previous onClick={() => paginar(paginaActual - 1)} />
+        </PaginationItem>
+        {[...Array(numeroPaginas)].map((_, i) => (
+          <PaginationItem active={i + 1 === paginaActual} key={i}>
+            <PaginationLink onClick={() => paginar(i + 1)}>
+              {i + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+        <PaginationItem disabled={paginaActual >= numeroPaginas}>
+          <PaginationLink next onClick={() => paginar(paginaActual + 1)} />
+        </PaginationItem>
+        <PaginationItem disabled={paginaActual >= numeroPaginas}>
+          <PaginationLink last onClick={() => paginar(numeroPaginas)} />
+        </PaginationItem>
+      </Pagination>
       {/* Modal para editar */}
       {clienteActual && (
         <Modal isOpen={modalEdit} toggle={toggleModalEdit}>
