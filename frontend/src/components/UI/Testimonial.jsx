@@ -42,17 +42,18 @@ const Testimonial = () => {
     <Slider {...settings}>
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        "¡Increíble experiencia con esta empresa de alquiler de autos! 
+        Reservé un coche para un viaje de negocios de último minuto y 
+        el proceso fue rápido y sin complicaciones. El auto estaba impecable 
+        y el personal fue muy amable y servicial. Definitivamente los 
+        recomendaría a cualquiera que necesite alquilar un auto".
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava01} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Alejandro Sarmiento</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
@@ -60,17 +61,18 @@ const Testimonial = () => {
 
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        "Alquilé un auto para unas vacaciones familiares y estoy muy impresionado 
+        con el servicio que recibí. El proceso de reserva en línea fue fácil y el 
+        precio era muy competitivo. El auto que recibimos estaba en excelentes condiciones 
+        y nos permitió disfrutar plenamente de nuestro viaje. ¡Definitivamente volveré 
+        a usar esta empresa en el futuro!"
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava02} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Elsa Pito</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
@@ -78,17 +80,19 @@ const Testimonial = () => {
 
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        "¡Una experiencia perfecta de principio a fin! Desde el momento en 
+        que entré en la oficina de la empresa, me sentí bienvenido y 
+        valorado como cliente. El personal fue extremadamente profesional 
+        y se tomó el tiempo para explicar todos los detalles del contrato 
+        de alquiler. El auto que alquilé estaba limpio y bien mantenido. 
+        Sin duda, volveré a alquilar con ellos en mi próximo viaje".
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava03} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Diego Portilla</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>
@@ -96,17 +100,19 @@ const Testimonial = () => {
 
       <div className="testimonial py-4 px-3">
         <p className="section__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magni
-          explicabo molestias recusandae repudiandae, dolor, sapiente placeat
-          ab, animi eum minima nulla facere aliquam aut vitae quo pariatur
-          voluptate odit?
+        "¡No puedo recomendar esta empresa lo suficiente! Alquilé un auto 
+        para un fin de semana largo y quedé impresionada con la calidad del 
+        servicio. El proceso de recogida y devolución fue rápido y eficiente
+        , y el personal fue extremadamente servicial. El auto estaba en 
+        excelente estado y era perfecto para nuestras necesidades.
+         Definitivamente volveré a elegir esta empresa en el futuro".
         </p>
 
         <div className="mt-3 d-flex align-items-center gap-4">
           <img src={ava04} alt="" className="w-25 h-25 rounded-2" />
 
           <div>
-            <h6 className="mb-0 mt-3">Jhon Doe</h6>
+            <h6 className="mb-0 mt-3">Juana Suarez</h6>
             <p className="section__description">Customer</p>
           </div>
         </div>

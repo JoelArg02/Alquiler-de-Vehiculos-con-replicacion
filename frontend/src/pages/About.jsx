@@ -13,7 +13,7 @@ import "../styles/about.css";
 const About = () => {
   return (
     <Helmet title="About">
-      <CommonSection title="About Us" />
+      <CommonSection title="Sobre nosotros" />
       <AboutSection aboutClass="aboutPage" />
 
       <section className="about__page-section">
@@ -28,21 +28,21 @@ const About = () => {
             <Col lg="6" md="6" sm="12">
               <div className="about__page-content">
                 <h2 className="section__title">
-                  We Are Committed To Provide Safe Ride Solutions
+                  Estamos comprometidos a brindar soluciones de viaje seguro
                 </h2>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                En nuestro compromiso por proporcionar soluciones de viaje seguro, 
+                nos esforzamos cada día por garantizar la protección y tranquilidad 
+                de nuestros clientes. Reconocemos la importancia primordial de la 
+                seguridad en cada etapa del viaje, desde la planificación hasta el regreso a casa.
                 </p>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                Nuestra prioridad es mantener estándares de seguridad excepcionales en todas 
+                nuestras operaciones. Desde la selección de proveedores y la inspección de 
+                vehículos, hasta la formación exhaustiva de nuestro personal, nos comprometemos 
+                a cumplir con los más altos estándares de seguridad y calidad.
                 </p>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">
@@ -51,8 +51,8 @@ const About = () => {
                   </span>
 
                   <div>
-                    <h6 className="section__subtitle">Need Any Help?</h6>
-                    <h4>+00123456789</h4>
+                    <h6 className="section__subtitle">Necesitas ayuda?</h6>
+                    <h4>+593 995064852</h4>
                   </div>
                 </div>
               </div>
@@ -64,8 +64,8 @@ const About = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">Experts</h6>
-              <h2 className="section__title">Our Members</h2>
+              <h6 className="section__subtitle">Expertos</h6>
+              <h2 className="section__title">Otros Miembros</h2>
             </Col>
             <OurMembers />
           </Row>
