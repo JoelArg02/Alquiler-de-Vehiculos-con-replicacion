@@ -20,17 +20,17 @@ const HomePage = () => {
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/adminShowClient">
+              <Link to="/administracion/clientes">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de clientes</Button>
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/adminShowAlquiler">
+              <Link to="/administracion/reservas">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de reservas</Button>
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/adminShowAgencia">
+              <Link to="/administracion/agencias">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de agencias</Button>
               </Link>
             </Col>

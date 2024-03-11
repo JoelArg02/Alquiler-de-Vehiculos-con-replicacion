@@ -12,10 +12,10 @@ Cliente.obtenerClientes = (callback) => {
   });
 };
 
-Cliente.ObtenerCliente = (cedula_cliente, callback) => {
+Cliente.ObtenerCliente = (cedula, callback) => {
   poolc.query(
     "SELECT * FROM CLIENTE WHERE CEDULA_CLIENTE = $1",
-    [cedula_cliente],
+    [cedula],
     (err, results) => {
       if (err) {
         callback(err, null);
@@ -27,17 +27,17 @@ Cliente.ObtenerCliente = (cedula_cliente, callback) => {
 };
 
 Cliente.crearCliente = (
-  cedula_cliente,
-  nombres_cliente,
-  apellidos_cliente,
-  telefono_cliente,
-  direccion_cliente,
-  correo_cliente,
+  cedula,
+  nombres,
+  apellidos,
+  telefono,
+  direccion,
+  correo,
   callback
 ) => {
   poolc.query(
     "INSERT INTO CLIENTE (CEDULA_CLIENTE, NOMBRES_CLIENTE, APELLIDOS_CLIENTE, TELEFONO_CLIENTE, DIRECCION_CLIENTE, CORREO_CLIENTE) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [cedula_cliente, nombres_cliente, apellidos_cliente, telefono_cliente, direccion_cliente, correo_cliente],
+    [cedula, nombres, apellidos, telefono, direccion, correo],
     (err, results) => {
       if (err) {
         if (typeof callback === "function") {
@@ -61,17 +61,17 @@ Cliente.crearCliente = (
 };
 
 Cliente.actualizarCliente = (
-  cedula_cliente,
-  nombres_cliente,
-  apellidos_cliente,
-  telefono_cliente,
-  direccion_cliente,
-  correo_cliente,
+  cedulaCliente,
+  nombres,
+  apellidos,
+  telefono,
+  direccion,
+  correo,
   callback
 ) => {
   poolc.query(
     "UPDATE CLIENTE SET NOMBRES_CLIENTE = $2, APELLIDOS_CLIENTE = $3, TELEFONO_CLIENTE = $4, DIRECCION_CLIENTE = $5, CORREO_CLIENTE = $6 WHERE CEDULA_CLIENTE = $1 RETURNING *",
-    [cedula_cliente, nombres_cliente, apellidos_cliente, telefono_cliente, direccion_cliente, correo_cliente],
+    [cedulaCliente, nombres, apellidos, telefono, direccion, correo],
     (err, results) => {
       if (err) {
         callback(err, null);
@@ -82,10 +82,10 @@ Cliente.actualizarCliente = (
   );
 };
 
-Cliente.eliminarCliente = (cedula_cliente, callback) => {
+Cliente.eliminarCliente = (cedulaCliente, callback) => {
   poolc.query(
     "DELETE FROM CLIENTE WHERE CEDULA_CLIENTE = $1",
-    [cedula_cliente],
+    [cedulaCliente],
     (err, results) => {
       if (err) {
         callback(err, null);

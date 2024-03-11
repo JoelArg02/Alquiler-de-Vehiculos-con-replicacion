@@ -4,7 +4,7 @@ const Alquiler = {};
 
 // Leer todos los alquileres
 Alquiler.obtenerAlquileres = (callback) => {
-  poolc.query("SELECT A.ID_ALQUILER,V.NOMBRE_VEHICULO,A.CEDULA_CLIENTE,A.FECHA_INICIO_ALQ,A.FECHA_FIN_ALQ FROM ALQUILER A JOIN VEHICULO V ON A.ID_VEHICULO = V.ID_VEHICULO;", (err, results) => {
+  poolc.query("SELECT * FROM alquiler", (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -13,16 +13,15 @@ Alquiler.obtenerAlquileres = (callback) => {
   });
 };
 
-
-Alquiler.obtenerAlquilerPorId = (id_alquiler, callback) => {
+Alquiler.obtenerAlquilerPorId = (id_vehiculo, callback) => {
   poolc.query(
-    "SELECT * FROM alquiler WHERE id_alquiler = $1",
-    [id_alquiler],
+    "SELECT * FROM ALQUILER WHERE ID_ALQUILER = $1",
+    [id_vehiculo],
     (err, results) => {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, results.rows[0]); // Suponiendo que solo hay un registro para cada id_alquiler
+        callback(null, results.rows[0]); // Suponiendo que solo hay un registro para cada combinación de ID_VEHICULO y CEDULA_CLIENTE
       }
     }
   );
@@ -30,16 +29,15 @@ Alquiler.obtenerAlquilerPorId = (id_alquiler, callback) => {
 
 // Crear un alquiler
 Alquiler.crearAlquiler = (
-  id_alquiler,
-  id_vehiculo,
-  cedula_cliente,
-  fecha_inicio_alq,
-  fecha_fin_alq,
+  idVehiculo,
+  cedulaCliente,
+  fechaInicio,
+  fechaFin,
   callback
 ) => {
   poolc.query(
-    "INSERT INTO alquiler (id_alquiler, id_vehiculo, cedula_cliente, fecha_inicio_alq, fecha_fin_alq) VALUES ($1, $2, $3, $4, $5)",
-    [id_alquiler, id_vehiculo, cedula_cliente, fecha_inicio_alq, fecha_fin_alq],
+    "INSERT INTO alquiler (id_vehiculo, cedula_cliente, fecha_inicio_alq, fecha_fin_alq) VALUES ($1, $2, $3, $4)",
+    [idVehiculo, cedulaCliente, fechaInicio, fechaFin],
     (err, results) => {
       if (err) {
         callback(err, null);
@@ -52,31 +50,30 @@ Alquiler.crearAlquiler = (
 
 // Actualizar un alquiler
 Alquiler.actualizarAlquiler = (
-  id_alquiler,
-  id_vehiculo,
-  cedula_cliente,
-  fecha_inicio_alq,
-  fecha_fin_alq,
+  idVehiculo,
+  cedulaCliente,
+  fechaInicio,
+  fechaFin,
   callback
 ) => {
   poolc.query(
-    "UPDATE alquiler SET id_vehiculo = $2, cedula_cliente = $3, fecha_inicio_alq = $4, fecha_fin_alq = $5 WHERE id_alquiler = $1 RETURNING *",
-    [id_alquiler, id_vehiculo, cedula_cliente, fecha_inicio_alq, fecha_fin_alq],
+    "UPDATE alquiler SET fecha_inicio_alq = $3, fecha_fin_alq = $4 WHERE id_vehiculo = $1 AND cedula_cliente = $2",
+    [idVehiculo, cedulaCliente, fechaInicio, fechaFin],
     (err, results) => {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, results.rows[0]);
+        callback(null, results);
       }
     }
   );
 };
 
 // Eliminar un alquiler
-Alquiler.eliminarAlquiler = (id_alquiler, callback) => {
+Alquiler.eliminarAlquiler = (idVehiculo, cedulaCliente, callback) => {
   poolc.query(
-    "DELETE FROM alquiler WHERE id_alquiler = $1",
-    [id_alquiler],
+    "DELETE FROM alquiler WHERE id_vehiculo = $1 AND cedula_cliente = $2",
+    [idVehiculo, cedulaCliente],
     (err, results) => {
       if (err) {
         callback(err, null);
