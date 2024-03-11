@@ -188,7 +188,6 @@ const AdminEditCar = () => {
               <tr>
                 <th>Agencia</th>
                 <th>Tipo</th>
-                <th>Imagen</th>
                 <th>Kilometraje</th>
                 <th>Nombre</th>
                 <th>Modelo</th>
@@ -205,7 +204,6 @@ const AdminEditCar = () => {
                 <tr key={vehiculo.id_vehiculo}>
                   <td>{vehiculo.nombre_agencia}</td>
                   <td>{vehiculo.tipo_vehiculo}</td>
-                  <td>{vehiculo.imagen_vehiculo}</td>
                   <td>{vehiculo.kilometraje_vehiculo}</td>
                   <td>{vehiculo.nombre_vehiculo}</td>
                   <td>{vehiculo.modelo_vehiculo}</td>

@@ -19,6 +19,7 @@ const mapDataToCarData = (apiData) => {
     id: item.id_vehiculo,
     brand: "Marca no especificada",
     rating: parseFloat(item.rating_vehiculo),
+    agencia: item.nombre_agencia,
     carName: item.nombre_vehiculo,
     imgUrl: item.imagen_vehiculo,
     model: item.modelo_vehiculo,
