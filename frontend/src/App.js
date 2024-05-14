@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Layout from "./components/Layout/Layout";
 import React from "react";
+=======
+import logo from './logo.svg';
+import './App.css';
+>>>>>>> parent of fa0e5ec (Merge branch 'main' of https://github.com/JoelArg02/Alquiler-de-Vehiculos-con-replicacion)
 =======
 import logo from './logo.svg';
 import './App.css';

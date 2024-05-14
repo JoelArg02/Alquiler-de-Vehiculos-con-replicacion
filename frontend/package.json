@@ -7,16 +7,22 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
+=======
+>>>>>>> parent of fa0e5ec (Merge branch 'main' of https://github.com/JoelArg02/Alquiler-de-Vehiculos-con-replicacion)
 =======
 >>>>>>> parent of fa0e5ec (Merge branch 'main' of https://github.com/JoelArg02/Alquiler-de-Vehiculos-con-replicacion)
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.3.0",
+=======
+>>>>>>> parent of fa0e5ec (Merge branch 'main' of https://github.com/JoelArg02/Alquiler-de-Vehiculos-con-replicacion)
 =======
 >>>>>>> parent of fa0e5ec (Merge branch 'main' of https://github.com/JoelArg02/Alquiler-de-Vehiculos-con-replicacion)
     "react-scripts": "5.0.1",
