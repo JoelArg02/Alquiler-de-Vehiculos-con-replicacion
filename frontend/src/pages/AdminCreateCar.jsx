@@ -18,7 +18,7 @@ const AdminCreateCar = () => {
     const [disponibilidadVehiculo, setDisponibilidadVehiculo] = useState('');
     const navigate = useNavigate();
     
-    // Función para guardar
+   
     const store = async (e) => {
         e.preventDefault();
         try {

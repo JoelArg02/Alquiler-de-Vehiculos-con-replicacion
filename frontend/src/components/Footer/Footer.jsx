@@ -85,20 +85,14 @@ const Footer = () => {
           <Col lg="3" md="4" sm="12">
             <div className="mb-4">
               <h5 className="footer__link-title">Noticias Nuevas</h5>
-              <p className="section__description">Suscribete para recibir noticias nuevas</p>
-              <div className="newsletter">
-                <input type="email" placeholder="Email" />
-                <span>
-                  <i class="ri-send-plane-line"></i>
-                </span>
-              </div>
+              <p className="office__info">Por inaguracion estaremos sorteando 100 vehiculos alta gama</p>
             </div>
           </Col>
 
           <Col lg="12">
             <div className="footer__bottom">
               <p className="section__description d-flex align-items-center justify-content-center gap-1 pt-4">
-                <i class="ri-copyright-line"></i>Copyright {year}, Developed by Joel Arguello
+                <i class="ri-copyright-line"></i>Copyright {year}, Developed by Danny Quingaluisa
               </p>
             </div>
           </Col>

@@ -5,7 +5,7 @@ import "../styles/vehicleDetails.css";
 
 const VehicleDetails = () => {
     const { id } = useParams();
-    
+    //const
     const [car, setCar] = useState({
         id_agencia: '',
         tipo_vehiculos: '',

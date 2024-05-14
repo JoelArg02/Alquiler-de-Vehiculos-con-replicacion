@@ -5,6 +5,8 @@ import "../styles/administracion.css";
 
 
 const HomePage = () => {
+
+  //const
   return (
     <Container>
       <Row className="justify-content-center mt-5">
@@ -18,17 +20,17 @@ const HomePage = () => {
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/administracion/clientes">
+              <Link to="/adminShowClient">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de clientes</Button>
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/administracion/reservas">
+              <Link to="/adminShowAlquiler">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de reservas</Button>
               </Link>
             </Col>
             <Col className="text-center">
-              <Link to="/administracion/agencias">
+              <Link to="/adminShowAgencia">
                 <Button color="primary" size="lg" className="cubo-btn">Administración de agencias</Button>
               </Link>
             </Col>
