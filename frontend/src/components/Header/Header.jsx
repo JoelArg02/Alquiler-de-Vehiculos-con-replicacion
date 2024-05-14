@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
@@ -30,30 +30,9 @@ const navLinks = [
 
 const Header = () => {
   const menuRef = useRef(null);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
-  useEffect(() => {
-    // Verifica si el usuario es admin
-    const admin = localStorage.getItem("admin");
-    if (admin === "1") {
-      setIsAdmin(true);
-      // Agrega dinámicamente el enlace si el usuario es admin
-      navLinks.push({
-        path: "/add-car",
-        display: "Añadir Vehículo",
-      });
-    } else {
-      // Elimina el enlace "Añadir Vehículo" si no es admin o si el admin cambia
-      const addCarIndex = navLinks.findIndex(
-        (link) => link.display === "Añadir Vehículo"
-      );
-      if (addCarIndex > -1) {
-        navLinks.splice(addCarIndex, 1);
-      }
-      setIsAdmin(false);
-    }
-  }, []);
+
   return (
     <header className="header">
       {/* ============ header top ============ */}
@@ -64,12 +43,12 @@ const Header = () => {
               <div className="header__top__left">
                 <span>Necesitas Ayuda?</span>
                 <span className="header__top__help">
-                  <i class="ri-phone-fill"></i> +593 998500498
+                  <i class="ri-phone-fill"></i> +593 995064852
                 </span>
               </div>
             </Col>
 
-            {/* <Col lg="6" md="6" sm="6">
+            <Col lg="6" md="6" sm="6">
               <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
                 <Link to="#" className=" d-flex align-items-center gap-1">
                   <i class="ri-login-circle-line"></i> Ingresa
@@ -79,7 +58,7 @@ const Header = () => {
                   <i class="ri-user-line"></i> Registrate
                 </Link>
               </div>
-            </Col> */}
+            </Col>
           </Row>
         </Container>
       </div>
@@ -132,8 +111,8 @@ const Header = () => {
               className=" d-flex align-items-center justify-content-end "
             >
               <button className="header__btn btn ">
-                <Link to="/login">
-                  <i class="ri-user-line"></i> Iniciar Sesion
+                <Link to="/contact">
+                  <i class="ri-phone-line"></i> Contactanos
                 </Link>
               </button>
             </Col>
